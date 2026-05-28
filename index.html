@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>FH-2026-Jun-Aug · Türkiye Trip</title>
+<link href="./manifest.json" rel="manifest"/>
+<style>
+    :root {
+      --bg-main: #f4f7fb;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-soft: #f9fbff;
+      --border-soft: rgba(15,23,42,0.10);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent-blue: #2563eb;
+      --accent-blue-soft: rgba(37,99,235,0.08);
+      --accent-gold: #d4a017;
+      --accent-gold-soft: rgba(212,160,23,0.12);
+      --radius-card: 18px;
+      --radius-pill: 999px;
+      --shadow-card: 0 12px 30px rgba(15,23,42,0.08);
+      --shadow-card-hover: 0 18px 40px rgba(15,23,42,0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37,99,235,0.10), transparent 34%),
+        radial-gradient(circle at top right, rgba(212,160,23,0.10), transparent 28%),
+        linear-gradient(to bottom, #f8fafc 0%, #eef2f7 100%);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 960px;
+      padding: 26px 14px 80px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .breadcrumb {
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(24px,3.2vw,30px);
+      font-weight: 750;
+      color: var(--text-main);
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .toolbar {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      border-radius: var(--radius-pill);
+      padding: 6px 12px;
+      font-size: 12px;
+      border: 1px solid var(--border-soft);
+      background: rgba(255,255,255,0.78);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 8px 22px rgba(15,23,42,0.06);
+      backdrop-filter: blur(8px);
+    }
+
+    .pill.install {
+      color: var(--accent-blue);
+      border-color: rgba(37,99,235,0.22);
+      background: var(--accent-blue-soft);
+    }
+
+    .pill.trip-offline {
+      color: #9a6700;
+      border-color: rgba(212,160,23,0.38);
+      background: var(--accent-gold-soft);
+    }
+
+    @media (max-width: 640px) {
+      .subtitle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        text-align: center;
+      }
+    }
+
+    .grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(249,251,255,0.96));
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: 16px 17px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-height: 160px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(37,99,235,0.22);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,1), rgba(245,248,255,0.98));
+    }
+
+    .card:active {
+      transform: translateY(0);
+      box-shadow: var(--shadow-card);
+      border-color: rgba(37,99,235,0.26);
+    }
+
+    .card:focus-visible {
+      outline: 3px solid rgba(37,99,235,0.22);
+      outline-offset: 3px;
+      border-color: rgba(37,99,235,0.35);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+      min-height: 28px;
+    }
+
+    .card-header {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+      margin-top: -2px;
+    }
+
+    .card-emoji {
+      font-size: 26px;
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(37,99,235,0.06);
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 650;
+      color: var(--text-main);
+    }
+
+
+    .card-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 0;
+      line-height: 1.45;
+    }
+    .card-chevron {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent-blue);
+      background: var(--accent-blue-soft);
+      border: 1px solid rgba(37,99,235,0.12);
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 500;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .card:hover .card-chevron,
+    .card:focus-visible .card-chevron {
+      transform: translateX(2px);
+      background: rgba(37,99,235,0.12);
+      border-color: rgba(37,99,235,0.22);
+    }
+
+
+    .hub-container {
+      text-align: center;
+      margin-top: 36px;
+    }
+
+    .hub-btn {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      color: var(--text-main);
+      font-size: 14px;
+      text-decoration: none;
+      letter-spacing: .3px;
+      box-shadow: 0 10px 26px rgba(15,23,42,0.08);
+    }
+
+    .ios-install-helper {
+      position: fixed;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 520px;
+      width: calc(100% - 28px);
+      background: rgba(255,255,255,.97);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: none;
+      z-index: 999;
+      box-shadow: 0 20px 40px rgba(15,23,42,.16);
+    }
+
+    .ios-install-helper p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .ios-install-helper strong {
+      color: var(--text-main);
+    }
+
+    .ios-install-actions {
+      margin-top: 8px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .ios-install-dismiss {
+      font-size: 12px;
+      color: var(--accent-blue);
+      cursor: pointer;
+      font-weight: 600;
+    }
+</style>
+</head>
+<body>
+<div class="page">
+<div class="page-header">
+<div class="breadcrumb">FH-2026-Jun-Aug · Türkiye Trip</div>
+<h1 class="title">Trip Home</h1>
+<p class="subtitle">Türkiye · 05 Jun 2026 → 13 Aug 2026</p>
+<div class="toolbar">
+<div class="pill" id="tripModePill">Trip Mode: Online</div>
+<div class="pill" id="tripModeHelp">?</div>
+<div class="pill install" id="installPill" style="display:none;">
+<span>⬇️</span>Install App
+      </div>
+</div>
+</div>
+<main>
+<div class="grid">
+<article aria-label="Open Accommodation" class="card" data-href="./accommodation.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">🏨</div>
+<div class="card-title">Accommodation</div>
+</div>
+<div class="card-text">Hotel details, confirmations, tours and stay information across Türkiye.</div>
+</article>
+<article aria-label="Open Activities" class="card" data-href="./activities.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">🎡</div>
+<div class="card-title">Activities</div>
+</div>
+<div class="card-text">Tours, experiences, sightseeing and booking confirmations.</div>
+</article>
+<article aria-label="Open Airports" class="card" data-href="./airports.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">🛫</div>
+<div class="card-title">Airports</div>
+</div>
+<div class="card-text">Airport details, maps, terminals and transfer reference placeholders.</div>
+</article>
+<article aria-label="Open Data and eSIM" class="card" data-href="./data-and-esim.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">📶</div>
+<div class="card-title">Data and eSIM</div>
+</div>
+<div class="card-text">Mobile data, eSIM details and connectivity planning for Türkiye.</div>
+</article>
+<article aria-label="Open Flights" class="card" data-href="./flights.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">✈️</div>
+<div class="card-title">Flights</div>
+</div>
+<div class="card-text">International and domestic flight schedules, terminals and booking details.</div>
+</article>
+<article aria-label="Open Guides" class="card" data-href="./guides.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">📘</div>
+<div class="card-title">Guides</div>
+</div>
+<div class="card-text">Reference guides and essential Türkiye travel information.</div>
+</article>
+<article aria-label="Open Immigration and Customs" class="card" data-href="./immigration-and-customs.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">🛂</div>
+<div class="card-title">Immigration and Customs</div>
+</div>
+<div class="card-text">Entry requirements, declarations, QR codes and border procedures.</div>
+</article>
+<article aria-label="Open Insurance" class="card" data-href="./insurance.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">🛡️</div>
+<div class="card-title">Insurance</div>
+</div>
+<div class="card-text">Travel insurance documents, policy information and emergency references.</div>
+</article>
+<article aria-label="Open Medical and Recovery" class="card" data-href="./medical-and-recovery.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">🏥</div>
+<div class="card-title">Medical and Recovery</div>
+</div>
+<div class="card-text">Hospital details, surgery, recovery information and medical support references.</div>
+</article>
+<article aria-label="Open Shopping" class="card" data-href="./shopping.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">🛍️</div>
+<div class="card-title">Shopping</div>
+</div>
+<div class="card-text">Shopping plans, markets, malls and budget considerations.</div>
+</article>
+<article aria-label="Open Task List" class="card" data-href="./task-list-guide.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">📝</div>
+<div class="card-title">Task List</div>
+</div>
+<div class="card-text">Trip organisation, planning and preparation checklists.</div>
+</article>
+<article aria-label="Open Tours and Regional Travel" class="card" data-href="./tours-and-regional-travel.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">🚗</div>
+<div class="card-title">Tours and Regional Travel</div>
+</div>
+<div class="card-text">Jolly Tours, village travel, Ankara movements and regional itinerary references.</div>
+</article>
+<article aria-label="Open Transfers and Transport" class="card" data-href="./transfers-and-transport.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">🚖</div>
+<div class="card-title">Transfers and Transport</div>
+</div>
+<div class="card-text">Airport transfers, taxis, domestic transport and pickup arrangements.</div>
+</article>
+<article aria-label="Open Travel Packing Guide" class="card" data-href="./travel-packing-guide.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">🎒</div>
+<div class="card-title">Travel Packing Guide</div>
+</div>
+<div class="card-text">Packing checklist, medications, travel essentials and preparation notes.</div>
+</article>
+<article aria-label="Open Türkiye Travel Guide" class="card" data-href="./turkiye-travel-guide.html" role="link" tabindex="0">
+<div class="card-top">
+
+<span aria-hidden="true" class="card-chevron">›</span>
+</div>
+<div class="card-header">
+<div class="card-emoji">🕌</div>
+<div class="card-title">Türkiye Travel Guide</div>
+</div>
+<div class="card-text">Currency, etiquette, safety, phrases, customs and local travel guidance.</div>
+</article>
+</div>
+<div class="hub-container">
+<a class="hub-btn" href="https://portal.trekworks.org/">← Back to TrekWorks Hub</a>
+</div>
+</main>
+</div>
+<div class="ios-install-helper" id="iosInstallHelper">
+<p>
+<strong>Install this trip for offline use</strong><br/>
+    Tap <strong>Share</strong> then <strong>Add to Home Screen</strong> in Safari.
+  </p>
+<div class="ios-install-actions">
+<span class="ios-install-dismiss" id="iosInstallDismiss">Dismiss</span>
+</div>
+</div>
+<script>
+document.querySelectorAll(".card[data-href]").forEach((card) => {
+  card.addEventListener("click", () => {
+    const href = card.getAttribute("data-href");
+    if (href) window.location.href = href;
+  });
+
+  card.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      const href = card.getAttribute("data-href");
+      if (href) window.location.href = href;
+    }
+  });
+});
+
+
+const TRIP_ID = "FH-2026-Jun-Aug";
+const TRIP_MODE_LS_KEY = "trekworks.tripMode:FH-2026-Jun-Aug";
+const DEFAULT_TRIP_MODE = "online";
+
+const DB_NAME = "trekworks";
+const DB_VERSION = 1;
+const STORE_NAME = "settings";
+const TRIP_MODE_KEY = "tripMode:FH-2026-Jun-Aug";
+
+function openTripDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME);
+      }
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function persistTripModeToDB(mode) {
+  try {
+    const db = await openTripDB();
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    tx.objectStore(STORE_NAME).put(mode, TRIP_MODE_KEY);
+  } catch {}
+}
+
+(async () => {
+  try {
+    const db = await openTripDB();
+    const tx = db.transaction(STORE_NAME, "readonly");
+    const store = tx.objectStore(STORE_NAME);
+    const req = store.get(TRIP_MODE_KEY);
+    req.onsuccess = () => {
+      if (req.result === undefined) {
+        const mode =
+          localStorage.getItem(TRIP_MODE_LS_KEY) || DEFAULT_TRIP_MODE;
+        persistTripModeToDB(mode);
+      }
+    };
+  } catch {}
+})();
+
+function getTripMode() {
+  return localStorage.getItem(TRIP_MODE_LS_KEY) || DEFAULT_TRIP_MODE;
+}
+
+function setTripMode(mode) {
+  localStorage.setItem(TRIP_MODE_LS_KEY, mode);
+  persistTripModeToDB(mode);
+}
+
+const tripPill = document.getElementById("tripModePill");
+const helpPill = document.getElementById("tripModeHelp");
+
+function refreshTripModeUI() {
+  const mode = getTripMode();
+  if (mode === "offline") {
+    tripPill.textContent = "Trip Mode: Offline";
+    tripPill.classList.add("trip-offline");
+  } else {
+    tripPill.textContent = "Trip Mode: Online";
+    tripPill.classList.remove("trip-offline");
+  }
+}
+
+tripPill.addEventListener("click", () => {
+  const next = getTripMode() === "offline" ? "online" : "offline";
+  setTripMode(next);
+  refreshTripModeUI();
+});
+
+helpPill.addEventListener("click", () => {
+  alert(
+    "Trip Mode controls how external links behave while travelling.\n\n" +
+    "Offline: keeps you inside the app.\n" +
+    "Online: allows external sites."
+  );
+});
+
+refreshTripModeUI();
+
+let deferredInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  document.getElementById("installPill").style.display = "inline-flex";
+});
+
+window.addEventListener("appinstalled", () => {
+  document.getElementById("installPill").style.display = "none";
+  deferredInstallPrompt = null;
+});
+
+document.getElementById("installPill").addEventListener("click", async () => {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+});
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./service-worker.js", { scope: "./" })
+    .then(() => {
+      navigator.serviceWorker.getRegistrations().then(regs => {
+        for (let reg of regs) reg.update();
+      });
+    });
+}
+
+(function () {
+  const DISMISS_KEY = "trekworks.iosInstallDismissed";
+  const helper = document.getElementById("iosInstallHelper");
+  const dismissBtn = document.getElementById("iosInstallDismiss");
+
+  if (!helper || !dismissBtn) return;
+
+  const ua = navigator.userAgent;
+  const isIOS = /iPad|iPhone|iPod/.test(ua);
+  const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
+  const isStandalone =
+    navigator.standalone === true ||
+    window.matchMedia("(display-mode: standalone)").matches;
+
+  const dismissed = localStorage.getItem(DISMISS_KEY) === "true";
+
+  if (isIOS && isSafari && !isStandalone && !dismissed) {
+    helper.style.display = "block";
+  }
+
+  dismissBtn.addEventListener("click", () => {
+    localStorage.setItem(DISMISS_KEY, "true");
+    helper.style.display = "none";
+  });
+})();
+</script>
+</body>
+</html>

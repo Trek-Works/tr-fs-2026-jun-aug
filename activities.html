@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Activities – FH-2026-Jun-Aug Türkiye Trip</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+   :root {
+      --bg: #f4f7fb;
+      --bg-elevated: #ffffff;
+      --bg-card: #ffffff;
+      --bg-optional: #f8fafc;
+      --border-soft: rgba(15,23,42,0.10);
+      --accent: #2563eb;
+      --accent-soft: rgba(37,99,235,0.08);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-soft: #64748b;
+      --radius-lg: 18px;
+      --radius-sm: 999px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 12px 30px rgba(15,23,42,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top left, rgba(37,99,235,0.10), transparent 34%), radial-gradient(circle at top right, rgba(212,160,23,0.10), transparent 28%), linear-gradient(to bottom, #f8fafc 0%, #eef2f7 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      max-width: 920px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 36px 18px 56px;
+      background: transparent;
+    }
+
+    /* ===== Header ===== */
+
+    .page-header {
+      text-align: center;
+    }
+
+    .page-header .toolbar {
+      justify-content: center;
+    }
+
+    .breadcrumb {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .title {
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--text-soft);
+      text-transform: uppercase;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0 26px;
+      align-items: center;
+    }
+
+    .pill-button {
+      border-radius: 999px;
+      border: 1px solid rgba(37,99,235,0.18);
+      background: rgba(255,255,255,0.78);
+      color: var(--text-main);
+      font-size: 13px;
+      padding: 6px 14px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ===== Sections ===== */
+
+    .section {
+      margin-top: 48px;
+    }
+
+    /* NEW: section-level collapsible wrapper */
+    .section > details.section-collapse {
+      border: 0;
+    }
+
+    /* Make the section summary behave like your existing header block */
+    .section > details.section-collapse > summary.section-header {
+      margin-bottom: 14px; /* preserve original spacing */
+    }
+
+    /* Remove default marker for section summary only (optional activities keep existing behaviour) */
+    .section > details.section-collapse > summary.section-header::-webkit-details-marker {
+      display: none;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      gap: 12px;
+    }
+
+    /* When section-header is used as a <summary>, we don't want double bottom margin */
+    .section > details.section-collapse > summary.section-header {
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* ===== Cards ===== */
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(249,251,255,0.96));
+      border-radius: var(--radius-lg);
+      padding: 6px 20px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      margin-top: 14px;
+    }
+
+    .card.optional {
+      background: #f8fafc;
+      box-shadow: none;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .card-meta {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-top: 6px;
+      margin-bottom: 10px;
+    }
+
+
+    /* Activities metadata aligned to Accommodation index */
+    .activity-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-top: 6px;
+      margin-bottom: 10px;
+    }
+
+    .activity-meta-row .label {
+      font-weight: 500;
+      color: #334155 !important;
+      margin-right: 4px;
+    }
+
+    .activity-meta-row .meta-value {
+      color: var(--text-soft);
+    }
+
+    /* Accommodation metadata contract */
+    .meta-label {
+      font-weight: 500;
+      color: #334155;
+      margin-right: 4px;
+    }
+
+    /* Backwards-compatible alias for existing Activities markup */
+    .meta-row .label {
+      font-weight: 500;
+      color: #334155;
+      margin-right: 4px;
+    }
+
+    ul.planned-list {
+      list-style: none;
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #334155;
+    }
+
+    ul.planned-list li {
+      margin-bottom: 8px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    ul.planned-list li:last-child {
+    margin-bottom: 4px;
+    }
+
+    ul.planned-list li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: var(--accent);
+    }
+
+    .optional-label {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .optional-note {
+      font-size: 14px;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.02),
+        transparent
+      );
+      margin: 14px 0;
+    }
+
+    .card-footer {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .link-pill {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(37,99,235,0.16);
+      padding: 4px 10px;
+      font-size: 11px;
+      text-decoration: none;
+      color: var(--accent);
+      background: #ffffff;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    footer {
+      margin-top: 56px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Footer line-break control */
+    .desktop-only {
+      display: inline;
+    }
+
+    @media (max-width: 640px) {
+      .desktop-only {
+        display: none;
+      }
+    }
+
+    /* ===== <details> Chevron ===== */
+
+    details summary {
+      list-style: none;
+      cursor: pointer;
+      position: relative;
+      padding-left: 22px;
+    }
+
+    details summary::before {
+      content: "▶";
+      position: absolute;
+      left: 0;
+      top: 1px;
+      font-size: 13px;
+      color: var(--text-soft);
+      transition: transform 0.2s ease;
+    }
+
+    details[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    /* ===== Mobile ===== */
+
+    @media (max-width: 640px) {
+      .subtitle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        text-align: center;
+      }
+
+      .subtitle-dates {
+        font-size: 13px;
+      }
+
+      /* Meta rows (Dates/Base, Base/Nights, Optional meta) — align with Accommodation */
+      .meta-row,
+      .activity-meta-row {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      /* MOBILE FIX: make footer pills wrap nicely (match Airport + Accommodation) */
+      .card-footer {
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .card-footer .link-pill {
+        flex: 1 1 calc(50% - 6px);
+        text-align: center;
+      }
+    }
+
+    /* ===== Offline Overlay ===== */
+
+    .offline-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 11, 0.88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .offline-box {
+      max-width: 420px;
+      margin: 20px;
+      padding: 20px 22px;
+      background: linear-gradient(
+        145deg,
+        var(--bg-card, #11141f),
+        var(--bg-soft, #181b26)
+      );
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+      text-align: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .offline-box h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .offline-box p {
+      margin: 0 0 16px;
+      font-size: 14px;
+      color: #b5bed5;
+      line-height: 1.4;
+    }
+
+    .offline-box button {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(78, 168, 255, 0.15);
+      color: #4ea8ff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    /* ===== Full-screen Modals (aligned to Hire Car index) ===== */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 11, 0.88);
+      display: none;
+      flex-direction: column;
+      z-index: 9998;
+    }
+
+    .modal-shell {
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      height: 52px;
+      min-height: 52px;
+      background: #0b1020;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      color: #f9fafb;
+      font-size: 14px;
+    }
+
+    .modal-title {
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 12px;
+      flex: 1 1 auto;
+    }
+
+    .modal-open {
+      display: none;
+    }
+
+    .modal-close {
+      border: 1px solid rgba(255,255,255,0.16);
+      background: #ffffff;
+      color: #f9fafb;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .modal-frame {
+      width: 100%;
+      height: calc(100vh - 52px);
+      border: 0;
+      background: #ffffff;
+    }
+
+    .modal-launch {
+      display: none;
+      flex: 1 1 auto;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: #ffffff;
+    }
+
+    .launch-card {
+      width: min(560px, 100%);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(79, 140, 255, 0.14), rgba(15, 22, 41, 0.92));
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+      padding: 22px;
+      text-align: center;
+    }
+
+    .launch-card h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: #f5f7ff;
+    }
+
+    .launch-card p {
+      margin: 0 0 18px;
+      font-size: 14px;
+      line-height: 1.45;
+      color: #b5bed5;
+    }
+
+    .launch-card a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(147, 197, 253, 0.55);
+      background: rgba(79, 140, 255, 0.16);
+      color: #bfdbfe;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+
+    .map-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 11, 0.88);
+      display: none;
+      flex-direction: column;
+      z-index: 9998;
+    }
+
+    .map-modal-header {
+      height: 52px;
+      min-height: 52px;
+      background: #0b1020;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      color: #f9fafb;
+      font-size: 14px;
+    }
+
+    .map-modal-title {
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 12px;
+      flex: 1 1 auto;
+    }
+
+    .map-modal-close {
+      border: 1px solid rgba(255,255,255,0.16);
+      background: #ffffff;
+      color: #f9fafb;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .map-modal iframe {
+      width: 100%;
+      height: calc(100vh - 52px);
+      border: 0;
+      background: #ffffff;
+    }
+
+    @media (max-width: 640px) {
+      .modal-shell {
+        height: 100%;
+        width: 100%;
+      }
+
+      .modal-header,
+      .map-modal-header {
+        height: 48px;
+        min-height: 48px;
+      }
+
+      .modal-frame,
+      .map-modal iframe {
+        height: calc(100vh - 48px);
+      }
+
+      .modal-open {
+        display: none;
+      }
+    }
+
+  
+
+
+
+/* ===== Optional activity title alignment fixes ===== */
+details.card .card-header > div {
+  width: 100%;
+}
+
+details.card .card-title {
+  display: block !important;
+  width: fit-content;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  text-align: left !important;
+}
+
+details.card .card-meta {
+  text-align: left !important;
+}
+
+details.card .card-inner {
+  text-align: left !important;
+}
+
+details.card .divider {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+/* ===== Alignment refinements ===== */
+.section-header {
+  align-items: center !important;
+}
+
+.section-header > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  margin-left: 14px;
+}
+
+details.card .card-title {
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+details.card .card-header {
+  align-items: flex-start;
+}
+
+.optional-label {
+  text-align: left;
+  padding-left: 0;
+}
+
+.optional-note {
+  text-align: left;
+  padding-left: 0;
+}
+
+/* ===== Türkiye light-theme controlled overrides ===== */
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(249,251,255,0.96)) !important;
+  border-color: rgba(15,23,42,0.10) !important;
+  box-shadow: 0 12px 30px rgba(15,23,42,0.08) !important;
+}
+
+.card.optional,
+details.card {
+  background: #f8fafc !important;
+}
+
+.card-title {
+  color: var(--accent) !important;
+}
+
+.activity-meta-row .label,
+.meta-row .label,
+.meta-label {
+  color: #334155 !important;
+  font-weight: 650;
+}
+
+.activity-meta-row .meta-value,
+.meta-row,
+.card-meta,
+.optional-note,
+.section-subtitle {
+  color: var(--text-soft) !important;
+}
+
+ul.planned-list {
+  color: #334155 !important;
+  text-align: left !important;
+}
+
+ul.planned-list li {
+  text-align: left !important;
+}
+
+.link-pill {
+  background: #ffffff !important;
+  color: var(--accent) !important;
+  border-color: rgba(37,99,235,0.16) !important;
+  box-shadow: 0 4px 10px rgba(15,23,42,0.05);
+}
+
+.pill {
+  background: rgba(37,99,235,0.06) !important;
+  border-color: rgba(37,99,235,0.12) !important;
+  color: var(--accent) !important;
+}
+
+.pill-button {
+  background: rgba(255,255,255,0.78) !important;
+  border-color: rgba(37,99,235,0.18) !important;
+  color: var(--accent) !important;
+  box-shadow: 0 8px 22px rgba(15,23,42,0.06);
+}
+
+.modal-overlay,
+.map-modal,
+.offline-overlay {
+  background: rgba(15,23,42,0.42) !important;
+  backdrop-filter: blur(8px);
+}
+
+.modal-shell,
+.modal-frame,
+.modal-launch,
+.map-modal iframe {
+  background: #f8fafc !important;
+}
+
+.modal-header,
+.map-modal-header {
+  background: #ffffff !important;
+  color: var(--text-main) !important;
+  border-bottom: 1px solid rgba(15,23,42,0.10) !important;
+}
+
+.modal-close,
+.map-modal-close {
+  background: #ffffff !important;
+  color: var(--accent) !important;
+  border-color: rgba(37,99,235,0.16) !important;
+}
+
+.launch-card,
+.offline-box {
+  background: #ffffff !important;
+  color: var(--text-main) !important;
+  border-color: rgba(15,23,42,0.10) !important;
+  box-shadow: 0 20px 45px rgba(15,23,42,0.14) !important;
+}
+
+.launch-card h2,
+.offline-box h2 {
+  color: var(--text-main) !important;
+}
+
+.launch-card p,
+.offline-box p {
+  color: var(--text-soft) !important;
+}
+
+.launch-card a,
+.offline-box button {
+  background: rgba(37,99,235,0.08) !important;
+  color: var(--accent) !important;
+  border-color: rgba(37,99,235,0.24) !important;
+}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="page-header">
+<div class="breadcrumb">FH-2026-Jun-Aug · Türkiye Trip</div>
+<h1 class="title">
+     Activities
+    </h1>
+<p class="subtitle">
+<span class="subtitle-main">Activities and journey plans for Türkiye trip</span>
+<span class="subtitle-dates">(05 Jun 2026 → 13 Aug 2026)</span>
+</p>
+<div class="toolbar">
+<a class="pill-button" href="https://tr-fh-2026-jun-aug.trekworks.org/" style="color:#2563eb">
+      ← Back to Trip Home
+     </a>
+</div>
+<section class="section">
+<div class="section-header">
+<div>
+<div class="section-title">🏨 Istanbul Arrival &amp; Adjustment</div>
+<div class="section-subtitle">Arrival, settling in and beginning the Türkiye journey</div>
+</div>
+<div class="pill">🟢 Easy</div>
+</div>
+<div class="two-column">
+<div class="card">
+<div class="card-inner">
+<div class="card-header">
+<div>
+<div class="card-title">Suggested Plans</div>
+</div>
+</div>
+<div class="activity-meta-row">
+<div><span class="label">Dates:</span> <span class="meta-value">06 → 10 Jun</span></div>
+<div><span class="label">Base:</span> <span class="meta-value">Istanbul</span></div>
+<div><span class="label">Intensity:</span> <span class="meta-value">Easy / Moderate</span></div>
+</div>
+<ul class="planned-list">
+<li><strong>06 Jun (Sat)</strong> — Arrive Istanbul → airport transfer → settle into accommodation and local orientation.</li>
+<li><strong>07 Jun (Sun)</strong> — Light exploration around Taksim / Galata / Istiklal Street; Turkish breakfast and relaxed walking day.</li>
+<li><strong>08 Jun (Mon)</strong> — Bosphorus cruise or ferry experience; flexible café and rooftop dining options.</li>
+<li><strong>09 Jun (Tue)</strong> — Grand Bazaar / Spice Bazaar / Sultanahmet exploration depending on energy and weather.</li>
+<li><strong>10 Jun (Wed)</strong> — Transfer to airport for domestic flight to Antalya.</li>
+</ul>
+</div>
+</div>
+<details class="card">
+<summary class="card-inner">
+<div class="optional-label">Optional activities</div>
+<div class="optional-note">Ideas if timing, energy and local arrangements allow.</div>
+</summary>
+<div class="card-inner">
+<div class="card-header">
+<div>
+<div class="card-title">Galata Tower &amp; Rooftop Cafés</div>
+<div class="card-meta">Relaxed central Istanbul exploration</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="label">Best for:</span> Late afternoon → evening</div>
+<div><span class="label">Intensity:</span> Easy</div>
+</div>
+<div class="card-footer">
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Galata%20Tower%20Istanbul%20Turkey&amp;output=embed', 'Galata Tower'); return false;">View Map</a>
+</div>
+<div class="divider"></div>
+<div class="card-header">
+<div>
+<div class="card-title">Bosphorus Cruise</div>
+<div class="card-meta">Classic Istanbul water experience</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="label">Best for:</span> Sunset / early evening</div>
+<div><span class="label">Intensity:</span> Easy</div>
+</div>
+<div class="card-footer">
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Bosphorus%20Cruise%20Istanbul%20Turkey&amp;output=embed', 'Bosphorus Cruise'); return false;">View Map</a>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section class="section">
+<div class="section-header">
+<div>
+<div class="section-title">🏖️ Antalya Resort Period</div>
+<div class="section-subtitle">Beach, resort and coastal pacing</div>
+</div>
+<div class="pill">🟢 Easy</div>
+</div>
+<div class="two-column">
+<div class="card">
+<div class="card-inner">
+<div class="card-header">
+<div>
+<div class="card-title">Suggested Plans</div>
+</div>
+</div>
+<div class="activity-meta-row">
+<div><span class="label">Dates:</span> <span class="meta-value">10 → 17 Jun</span></div>
+<div><span class="label">Base:</span> <span class="meta-value">Antalya</span></div>
+<div><span class="label">Intensity:</span> <span class="meta-value">Relaxed</span></div>
+</div>
+<ul class="planned-list">
+<li><strong>10 Jun (Wed)</strong> — Arrive Antalya → transfer to resort → pool / beach orientation.</li>
+<li><strong>11 → 16 Jun</strong> — Flexible resort period: beach time, pool days, Turkish breakfasts, local dining and optional excursions.</li>
+<li><strong>Potential activities</strong> — Old Town Kaleiçi, Düden Waterfalls, coastal drives and local markets.</li>
+<li><strong>17 Jun (Wed)</strong> — Domestic flight back to Istanbul.</li>
+</ul>
+</div>
+</div>
+<details class="card">
+<summary class="card-inner">
+<div class="optional-label">Optional activities</div>
+<div class="optional-note">Ideas if timing, energy and local arrangements allow.</div>
+</summary>
+<div class="card-inner">
+<div class="card-header">
+<div>
+<div class="card-title">Kaleiçi Old Town</div>
+<div class="card-meta">Historic harbour district</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="label">Best for:</span> Evening walks</div>
+<div><span class="label">Intensity:</span> Easy</div>
+</div>
+<div class="card-footer">
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Kaleici%20Antalya%20Turkey&amp;output=embed', 'Kaleici'); return false;">View Map</a>
+</div>
+<div class="divider"></div>
+<div class="card-header">
+<div>
+<div class="card-title">Düden Waterfalls</div>
+<div class="card-meta">Scenic waterfall experience</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="label">Best for:</span> Half-day outing</div>
+<div><span class="label">Intensity:</span> Moderate</div>
+</div>
+<div class="card-footer">
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Duden%20Waterfalls%20Antalya%20Turkey&amp;output=embed', 'Duden Waterfalls'); return false;">View Map</a>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section class="section">
+<div class="section-header">
+<div>
+<div class="section-title">🚌 Jolly Tour — Ege Akdeniz</div>
+<div class="section-subtitle">Structured guided regional touring</div>
+</div>
+<div class="pill">🟡 Moderate</div>
+</div>
+<div class="two-column">
+<div class="card">
+<div class="card-inner">
+<div class="card-header">
+<div>
+<div class="card-title">Suggested Plans</div>
+</div>
+</div>
+<div class="activity-meta-row">
+<div><span class="label">Dates:</span> <span class="meta-value">20 → 26 Jun</span></div>
+<div><span class="label">Base:</span> <span class="meta-value">Aegean / Mediterranean tour</span></div>
+<div><span class="label">Intensity:</span> <span class="meta-value">Moderate</span></div>
+</div>
+<ul class="planned-list">
+<li>Tour accommodation, exact cities and timings are still pending confirmation.</li>
+<li>Expect early departures, intercity coach travel and multiple hotel stays.</li>
+<li>Likely touring style includes coastal towns, scenic drives, local dining and regional sightseeing.</li>
+<li>Keep packing flexible with overnight movement expected during the tour.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="section-header">
+<div>
+<div class="section-title">👨‍👩‍👧‍👦 Family Touring Period</div>
+<div class="section-subtitle">Village visits, family coordination and flexible local travel</div>
+</div>
+<div class="pill">🟢 Flexible</div>
+</div>
+<div class="two-column">
+<div class="card">
+<div class="card-inner">
+<div class="card-header">
+<div>
+<div class="card-title">Suggested Plans</div>
+</div>
+</div>
+<div class="activity-meta-row">
+<div><span class="label">Dates:</span> <span class="meta-value">29 Jun → 13 Jul</span></div>
+<div><span class="label">Base:</span> <span class="meta-value">Family / regional travel</span></div>
+<div><span class="label">Intensity:</span> <span class="meta-value">Flexible</span></div>
+</div>
+<ul class="planned-list">
+<li>Travelling with cousins and family by car.</li>
+<li>Parents’ village visits and Ankara travel expected during this period.</li>
+<li>Accommodation and daily plans will likely evolve while travelling.</li>
+<li>Expect spontaneous meals, local touring, cafés and flexible scheduling.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="section-header">
+<div>
+<div class="section-title">🚌 Jolly Tour — Likya</div>
+<div class="section-subtitle">Guided tour segment before recovery period</div>
+</div>
+<div class="pill">🟡 Moderate</div>
+</div>
+<div class="two-column">
+<div class="card">
+<div class="card-inner">
+<div class="card-header">
+<div>
+<div class="card-title">Suggested Plans</div>
+</div>
+</div>
+<div class="activity-meta-row">
+<div><span class="label">Dates:</span> <span class="meta-value">14 → 18 Jul</span></div>
+<div><span class="label">Base:</span> <span class="meta-value">Likya region</span></div>
+<div><span class="label">Intensity:</span> <span class="meta-value">Moderate</span></div>
+</div>
+<ul class="planned-list">
+<li>Jolly Tour Likya segment confirmed as covering this period.</li>
+<li>Exact tour structure, hotels, cities and timings still require confirmation.</li>
+<li>Expect regional touring, intercity movement and operator-managed scheduling.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="section-header">
+<div>
+<div class="section-title">🏥 Surgery &amp; Recovery Period</div>
+<div class="section-subtitle">Reduced-intensity planning focused on recovery and support</div>
+</div>
+<div class="pill">🟢 Recovery</div>
+</div>
+<div class="two-column">
+<div class="card">
+<div class="card-inner">
+<div class="card-header">
+<div>
+<div class="card-title">Suggested Plans</div>
+</div>
+</div>
+<div class="activity-meta-row">
+<div><span class="label">Dates:</span> <span class="meta-value">18 → 31 Jul</span></div>
+<div><span class="label">Base:</span> <span class="meta-value">Istanbul</span></div>
+<div><span class="label">Intensity:</span> <span class="meta-value">Low</span></div>
+</div>
+<ul class="planned-list">
+<li>Primary focus during this period is surgery, recovery and rest.</li>
+<li>Activities should remain flexible and energy-aware.</li>
+<li>Likely focus areas include nearby cafés, dining, short walks and recovery-friendly outings.</li>
+<li>Additional support room booked for cousin assisting family during hospital/recovery period.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="section-header">
+<div>
+<div class="section-title">📍 Flexible Final Segment</div>
+<div class="section-subtitle">Open planning period before departure from Türkiye</div>
+</div>
+<div class="pill">🟢 Flexible</div>
+</div>
+<div class="two-column">
+<div class="card">
+<div class="card-inner">
+<div class="card-header">
+<div>
+<div class="card-title">Suggested Plans</div>
+</div>
+</div>
+<div class="activity-meta-row">
+<div><span class="label">Dates:</span> <span class="meta-value">31 Jul → 12 Aug</span></div>
+<div><span class="label">Base:</span> <span class="meta-value">To be decided</span></div>
+<div><span class="label">Intensity:</span> <span class="meta-value">Flexible</span></div>
+</div>
+<ul class="planned-list">
+<li>Figen confirmed this period is not yet finalised.</li>
+<li>Potential options include additional Istanbul time, family stays or regional touring.</li>
+<li>This period intentionally remains flexible until plans are confirmed locally.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+
+
+
+
+
+
+</div>
+<!-- Osaka (Honshu) -->
+
+<!-- Okinawa -->
+
+<!-- Fukuoka / Kyushu -->
+
+<!-- Osaka Return -->
+
+<div class="toolbar" style="justify-content:center; margin-top:32px;"><a class="pill-button" href="https://tr-fh-2026-jun-aug.trekworks.org/" style="color:#2563eb">← Back to Trip Home</a></div><footer>
+    For overnight stays, see
+    <a href="https://tr-fh-2026-jun-aug.trekworks.org/accommodation.html">Accommodation</a>.
+    For air travel, see
+    <a href="https://tr-fh-2026-jun-aug.trekworks.org/flights.html">Flights</a>.
+    <br class="desktop-only"/>
+    For regional movements, see
+    <a href="https://tr-fh-2026-jun-aug.trekworks.org/tours-and-regional-travel.html">Tours and Regional Travel</a>.
+    For recovery planning, see
+    <a href="https://tr-fh-2026-jun-aug.trekworks.org/medical-and-recovery.html">Medical and Recovery</a>.
+    </footer>
+</div>
+<div class="map-modal" id="mapModal">
+<div class="map-modal-header">
+<div class="map-modal-title" id="mapModalTitle">Map</div>
+<button class="map-modal-close" onclick="closeMapModal()">X Close</button>
+</div>
+<iframe id="mapFrame" loading="lazy" src=""></iframe>
+</div>
+<div aria-label="Site preview" aria-modal="true" class="modal-overlay" id="modalOverlay" role="dialog">
+<div class="modal-shell">
+<div class="modal-header">
+<div class="modal-title" id="modalTitle">Loading…</div>
+<a class="modal-open" href="#" id="modalOpen" rel="noopener" target="_blank">Open</a>
+<button aria-label="Close" class="modal-close" onclick="closeModal()">X Close</button>
+</div>
+<iframe class="modal-frame" id="modalFrame" title="External content"></iframe>
+<div class="modal-launch" id="modalLaunch">
+<div class="launch-card">
+<h2 id="launchTitle">Open site</h2>
+<p>This site may block embedded views. Use the button below if the page does not load inside the trip card.</p>
+<a href="#" id="launchLink" rel="noopener" target="_blank">Open in new tab</a>
+</div>
+</div>
+</div>
+</div>
+<div class="offline-overlay" id="offlineOverlay">
+<div class="offline-box">
+<h2>
+     You’re offline
+    </h2>
+<p>
+     This content requires an internet connection.
+     <br/>
+     You can continue using other parts of the app while offline.
+    </p>
+<button onclick="closeOffline()">
+     OK
+    </button>
+</div>
+</div>
+<script>
+function openMapModal(url, title) {
+  verifyConnectivity()
+    .then(function () {
+      document.getElementById('mapModalTitle').textContent = title || 'Map';
+      document.getElementById('mapFrame').src = url;
+      document.getElementById('mapModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    })
+    .catch(showOffline);
+}
+
+function closeMapModal() {
+  document.getElementById('mapFrame').src = '';
+  document.getElementById('mapModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function openLaunchModal(url, title) {
+  verifyConnectivity()
+    .then(function () {
+      const overlay = document.getElementById('modalOverlay');
+      const frame = document.getElementById('modalFrame');
+      const modalTitle = document.getElementById('modalTitle');
+      const openLink = document.getElementById('modalOpen');
+      const launch = document.getElementById('modalLaunch');
+      const launchTitle = document.getElementById('launchTitle');
+      const launchLink = document.getElementById('launchLink');
+
+      modalTitle.textContent = title || 'Open booking';
+      openLink.href = url;
+      launchTitle.textContent = title || 'Open booking';
+      launchLink.href = url;
+      launchLink.textContent = 'Open booking site';
+
+      frame.removeAttribute('src');
+      frame.style.display = 'none';
+      launch.style.display = 'flex';
+      overlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    })
+    .catch(showOffline);
+}
+
+function openModal(url, title, externalUrl, launchMode) {
+  verifyConnectivity()
+    .then(function () {
+      const overlay = document.getElementById('modalOverlay');
+      const frame = document.getElementById('modalFrame');
+      const modalTitle = document.getElementById('modalTitle');
+      const openLink = document.getElementById('modalOpen');
+      const targetUrl = externalUrl || url;
+
+      modalTitle.textContent = title || 'Preview';
+      openLink.href = targetUrl;
+
+      const launch = document.getElementById('modalLaunch');
+      launch.style.display = 'none';
+      frame.style.display = 'block';
+
+      if (launchMode) {
+        frame.src = 'external.html?url=' + encodeURIComponent(targetUrl);
+      } else {
+        frame.src = url;
+      }
+
+      overlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    })
+    .catch(showOffline);
+}
+
+function closeModal() {
+  const overlay = document.getElementById('modalOverlay');
+  const frame = document.getElementById('modalFrame');
+  const launch = document.getElementById('modalLaunch');
+  overlay.style.display = 'none';
+  frame.removeAttribute('src');
+  frame.style.display = 'block';
+  launch.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape') {
+    closeMapModal();
+    closeModal();
+    closeOffline();
+  }
+});
+
+document.getElementById('modalOverlay').addEventListener('click', function (event) {
+  if (event.target.id === 'modalOverlay') {
+    closeModal();
+  }
+});
+
+document.getElementById('mapModal').addEventListener('click', function (event) {
+  if (event.target.id === 'mapModal') {
+    closeMapModal();
+  }
+});
+
+function verifyConnectivity() {
+  return new Promise(function (resolve, reject) {
+    if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+      reject();
+      return;
+    }
+
+    const controller = new AbortController();
+    const timeout = setTimeout(function () {
+      controller.abort();
+      reject();
+    }, 800);
+
+    fetch('external.html', {
+      cache: 'no-store',
+      signal: controller.signal
+    })
+      .then(function (response) {
+        clearTimeout(timeout);
+        if (response && response.ok === false) {
+          reject();
+          return;
+        }
+        resolve();
+      })
+      .catch(function () {
+        clearTimeout(timeout);
+        reject();
+      });
+  });
+}
+
+function showOffline() {
+  document.getElementById('offlineOverlay').style.display = 'flex';
+}
+
+function closeOffline() {
+  document.getElementById('offlineOverlay').style.display = 'none';
+}
+
+// Prevent href="#" pills from jumping to the top if an offline check or modal launch fails.
+document.addEventListener('click', function (event) {
+  const hashPill = event.target.closest && event.target.closest('a[href="#"]');
+  if (hashPill) {
+    event.preventDefault();
+  }
+}, true);
+</script></body>
+</html>

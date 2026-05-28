@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Accommodation – FH-2026-Jun-Aug Türkiye Trip</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --card-soft: #f9fbff;
+      --bg-card: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: rgba(37,99,235,0.08);
+      --accent-gold: #d4a017;
+      --accent-gold-soft: rgba(212,160,23,0.12);
+      --badge: #eef2ff;
+      --text-main: #0f172a;
+      --text-soft: #64748b;
+      --border-subtle: rgba(15,23,42,0.10);
+      --chip-bg: #ffffff;
+      --chip-border: rgba(37,99,235,0.16);
+      --shadow-soft: 0 12px 30px rgba(15,23,42,0.08);
+      --shadow-modal: 0 20px 45px rgba(15,23,42,0.18);
+      --radius-xl: 18px;
+      --radius-pill: 999px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37,99,235,0.10), transparent 34%),
+        radial-gradient(circle at top right, rgba(212,160,23,0.10), transparent 28%),
+        linear-gradient(to bottom, #f8fafc 0%, #eef2f7 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 16px 40px;
+    }
+
+    .page-header { text-align: center; }
+    .page-header .toolbar { justify-content: center; }
+
+    .breadcrumb {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .title {
+      font-size: 30px;
+      font-weight: 750;
+      margin: 0;
+      color: var(--text-main);
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--text-soft);
+      text-transform: uppercase;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0 26px;
+      align-items: center;
+    }
+
+    .pill-button {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(37,99,235,0.18);
+      background: rgba(255,255,255,0.78);
+      color: var(--accent);
+      font-size: 13px;
+      padding: 7px 15px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 8px 22px rgba(15,23,42,0.06);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 18px 0 10px;
+    }
+
+    .section-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .section-header-left .emoji { font-size: 18px; }
+
+    .cards {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(249,251,255,0.96));
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      padding: 14px 18px 14px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.3;
+    }
+
+    .card-city {
+      margin-top: 2px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-soft);
+    }
+
+    .stay-chip {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      margin-bottom: 6px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(37,99,235,0.16);
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 4px 9px;
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .tour .stay-chip,
+    .flexible .stay-chip,
+    .family-stay .stay-chip {
+      border-color: rgba(212,160,23,0.28);
+      background: var(--accent-gold-soft);
+      color: #8a6200;
+    }
+
+    .recovery-stay .stay-chip {
+      border-color: rgba(220,38,38,0.18);
+      background: rgba(220,38,38,0.08);
+      color: #b91c1c;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-top: 7px;
+    }
+
+    .meta-label {
+      font-weight: 650;
+      color: #334155;
+      margin-right: 4px;
+    }
+
+    .room-row .room-value,
+    .phone-row .phone-value,
+    .note-row .note-value {
+      font-weight: 400;
+      color: var(--text-soft);
+    }
+
+    .detail-row {
+      margin-top: 7px;
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.45;
+    }
+
+    .detail-row a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .detail-row a:hover { text-decoration: underline; }
+
+    .card-footer {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .link-pill {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(37,99,235,0.16);
+      padding: 5px 11px;
+      font-size: 11px;
+      text-decoration: none;
+      color: var(--accent);
+      background: #ffffff;
+      white-space: nowrap;
+      flex: 0 0 auto;
+      box-shadow: 0 4px 10px rgba(15,23,42,0.05);
+    }
+
+    .link-pill:hover {
+      background: var(--accent-soft);
+      border-color: rgba(37,99,235,0.26);
+    }
+
+    .disabled-pill {
+      color: var(--text-soft);
+      border-color: var(--border-subtle);
+      background: #f8fafc;
+      cursor: default;
+    }
+
+    .map-modal,
+    .website-browser-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.42);
+      display: none;
+      flex-direction: column;
+      z-index: 9998;
+      backdrop-filter: blur(8px);
+    }
+
+    .map-modal-header,
+    .website-browser-modal-header {
+      height: 52px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      color: var(--text-main);
+      font-size: 14px;
+      box-shadow: 0 8px 24px rgba(15,23,42,0.08);
+    }
+
+    .map-modal-title,
+    .website-browser-modal-title {
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 12px;
+    }
+
+    .map-modal-close,
+    .website-browser-modal-close {
+      border: 1px solid rgba(37,99,235,0.16);
+      background: #ffffff;
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .map-modal iframe,
+    .website-browser-modal iframe {
+      width: 100%;
+      height: calc(100vh - 52px);
+      border: 0;
+      background: #f8fafc;
+    }
+
+    .website-modal,
+    .reservation-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.42);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 9998;
+      backdrop-filter: blur(8px);
+    }
+
+    .website-panel,
+    .reservation-panel {
+      width: min(560px, 100%);
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 22px;
+      box-shadow: var(--shadow-modal);
+      overflow: hidden;
+    }
+
+    .website-modal-header,
+    .reservation-modal-header {
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 16px 18px 14px;
+      color: var(--text-main);
+    }
+
+    .website-modal-kicker,
+    .reservation-modal-kicker {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+
+    .website-modal-title,
+    .reservation-modal-title {
+      font-size: 18px;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .website-modal-body,
+    .reservation-modal-body {
+      padding: 16px 18px 18px;
+    }
+
+    .website-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .reservation-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .website-detail,
+    .reservation-detail {
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      background: #f8fafc;
+      padding: 10px 12px;
+    }
+
+    .reservation-detail.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .website-detail-label,
+    .reservation-detail-label {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-bottom: 3px;
+    }
+
+    .website-detail-value,
+    .reservation-detail-value {
+      font-size: 14px;
+      color: var(--text-main);
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    .website-modal-actions,
+    .reservation-modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .website-action,
+    .website-modal-close,
+    .reservation-action,
+    .reservation-modal-close {
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      color: var(--text-main);
+      padding: 8px 13px;
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      flex: 1 1 auto;
+    }
+
+    .website-action.primary,
+    .reservation-action.primary {
+      color: var(--accent);
+      border-color: rgba(37,99,235,0.24);
+      background: var(--accent-soft);
+      font-weight: 650;
+    }
+
+    .footer-nav {
+      margin-top: 28px;
+      padding-top: 0;
+      border-top: none;
+      font-size: 12px;
+      color: var(--text-soft);
+      text-align: center;
+    }
+
+    .footer-line {
+      max-width: 980px;
+      margin: 0 auto;
+      line-height: 1.45;
+      color: var(--text-soft);
+    }
+
+    .footer-line a {
+      color: var(--accent);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .footer-line a:hover { text-decoration: underline; }
+
+    .desktop-only { display: inline; }
+    .mobile-only { display: none; }
+
+    .offline-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.42);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      backdrop-filter: blur(8px);
+    }
+
+    .offline-box {
+      max-width: 420px;
+      margin: 20px;
+      padding: 20px 22px;
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      box-shadow: var(--shadow-modal);
+      text-align: center;
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+
+    .offline-box h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: var(--text-main);
+    }
+
+    .offline-box p {
+      margin: 0 0 16px;
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.4;
+    }
+
+    .offline-box button {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(37,99,235,0.16);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+      .subtitle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        text-align: center;
+      }
+
+      .subtitle-dates { font-size: 13px; }
+
+      .meta-row {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .detail-row { margin-top: 6px; }
+
+      .card-footer {
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .card-footer .link-pill {
+        flex: 1 1 calc(50% - 6px);
+        text-align: center;
+      }
+
+      .website-modal,
+      .reservation-modal {
+        align-items: flex-end;
+        padding: 10px;
+      }
+
+      .website-panel,
+      .reservation-panel {
+        border-radius: 20px 20px 14px 14px;
+      }
+
+      .reservation-detail-grid { grid-template-columns: 1fr; }
+
+      .website-action,
+      .website-modal-close,
+      .reservation-action,
+      .reservation-modal-close {
+        flex-basis: 100%;
+        padding: 10px 13px;
+      }
+
+      .footer-line { line-height: 1.8; }
+
+      .desktop-only { display: none; }
+      .mobile-only { display: inline; }
+    }
+</style>
+</head>
+<body>
+<main class="page">
+<div class="page-header">
+<div class="breadcrumb">FH-2026-Jun-Aug · Türkiye Trip</div>
+<h1 class="title">Accommodation</h1>
+<p class="subtitle">
+<span class="subtitle-main">Stays for Türkiye trip</span>
+<span class="subtitle-dates">(05 Jun 2026 → 13 Aug 2026)</span>
+</p>
+<div class="toolbar">
+<a class="pill-button" href="https://tr-fh-2026-jun-aug.trekworks.org/" style="color:#2563eb;">
+        ← Back to Trip Home
+      </a>
+</div>
+</div>
+<section>
+<div class="section-header">
+<div class="section-header-left"><span class="emoji">🏨</span> Istanbul · 06 Jun → 10 Jun</div>
+</div>
+<div class="cards">
+<article class="card stay-card 🏨-hotel">
+<div class="card-header">
+<div>
+<div class="stay-chip">🏨 Hotel</div>
+<div class="card-title">Ramada By Wyndham Istanbul Pera Taksim</div>
+<div class="card-city">Istanbul</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="meta-label">Stay:</span> 4 nights</div>
+<div><span class="meta-label">Arrival:</span> 06 Jun 2026</div>
+<div><span class="meta-label">Depart:</span> 10 Jun 2026</div>
+<div><span class="meta-label">Check-in:</span> Not recorded</div>
+<div><span class="meta-label">Check-out:</span> Not recorded</div>
+</div>
+<div class="meta-row room-row">
+<div><span class="meta-label">Room Type:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Room Size:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
+</div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">Not recorded</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Ramada%20By%20Wyndham%20Istanbul%20Pera%20Taksim%20Mesrutiyet%20Cad.%20Oteller%20Sok.%20No:1-3%20Tepebasi%2C%20Istanbul%2C%2034430%2C%20Türkiye&amp;output=embed'); return false;">Mesrutiyet Cad. Oteller Sok. No:1-3 Tepebasi, Istanbul, 34430, Türkiye</a></div>
+<div class="card-footer">
+<a class="link-pill" href="#" onclick="openWebsiteHub('Ramada By Wyndham Istanbul Pera Taksim','#'); return false;">Hotel Website</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Ramada%20By%20Wyndham%20Istanbul%20Pera%20Taksim%20Mesrutiyet%20Cad.%20Oteller%20Sok.%20No:1-3%20Tepebasi%2C%20Istanbul%2C%2034430%2C%20Türkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openReservationHub('Ramada By Wyndham Istanbul Pera Taksim','Not recorded','Not recorded','Not recorded','06 Jun 2026 → 10 Jun 2026','Not recorded','Not recorded','#','#'); return false;">Online Reservation</a>
+<a class="link-pill" href="#" onclick="openExternalBrowser('Offline Reservation — Ramada By Wyndham Istanbul Pera Taksim','#'); return false;">Offline Reservation</a>
+</div>
+</article>
+</div>
+</section>
+<section>
+<div class="section-header">
+<div class="section-header-left"><span class="emoji">🏖️</span> Antalya · 10 Jun → 17 Jun</div>
+</div>
+<div class="cards">
+<article class="card stay-card 🏨-resort">
+<div class="card-header">
+<div>
+<div class="stay-chip">🏨 Resort</div>
+<div class="card-title">Swandor Hotels &amp; Resorts - Topkapi Palace</div>
+<div class="card-city">Antalya</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="meta-label">Stay:</span> 7 nights</div>
+<div><span class="meta-label">Arrival:</span> 10 Jun 2026</div>
+<div><span class="meta-label">Depart:</span> 17 Jun 2026</div>
+<div><span class="meta-label">Check-in:</span> Not recorded</div>
+<div><span class="meta-label">Check-out:</span> Not recorded</div>
+</div>
+<div class="meta-row room-row">
+<div><span class="meta-label">Room Type:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Room Size:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
+</div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">Not recorded</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Swandor%20Hotels%20&amp;%20Resorts%20-%20Topkapi%20Palace%20Lara%20Bölgesi%20Kundu%20Mevkii%20Antalya%2C%2007110%20Lara%2C%20Türkiye&amp;output=embed'); return false;">Lara Bölgesi Kundu Mevkii Antalya, 07110 Lara, Türkiye</a></div>
+<div class="detail-row note-row"><span class="meta-label">Note:</span> <span class="note-value">Turkish Airlines domestic flights expected for Istanbul ↔ Antalya. Exact flight details not yet recorded.</span></div>
+<div class="card-footer">
+<a class="link-pill" href="#" onclick="openWebsiteHub('Swandor Hotels &amp; Resorts - Topkapi Palace','#'); return false;">Hotel Website</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Swandor%20Hotels%20&amp;%20Resorts%20-%20Topkapi%20Palace%20Lara%20Bölgesi%20Kundu%20Mevkii%20Antalya%2C%2007110%20Lara%2C%20Türkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openReservationHub('Swandor Hotels &amp; Resorts - Topkapi Palace','Not recorded','Not recorded','Not recorded','10 Jun 2026 → 17 Jun 2026','Not recorded','Not recorded','#','#'); return false;">Online Reservation</a>
+<a class="link-pill" href="#" onclick="openExternalBrowser('Offline Reservation — Swandor Hotels &amp; Resorts - Topkapi Palace','#'); return false;">Offline Reservation</a>
+</div>
+</article>
+</div>
+</section>
+<section>
+<div class="section-header">
+<div class="section-header-left"><span class="emoji">🏨</span> Istanbul · 17 Jun → 20 Jun</div>
+</div>
+<div class="cards">
+<article class="card stay-card 🏨-hotel">
+<div class="card-header">
+<div>
+<div class="stay-chip">🏨 Hotel</div>
+<div class="card-title">Concept Nisantasi Hotels &amp; Spa</div>
+<div class="card-city">Istanbul</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="meta-label">Stay:</span> 3 nights</div>
+<div><span class="meta-label">Arrival:</span> 17 Jun 2026</div>
+<div><span class="meta-label">Depart:</span> 20 Jun 2026</div>
+<div><span class="meta-label">Check-in:</span> Not recorded</div>
+<div><span class="meta-label">Check-out:</span> Not recorded</div>
+</div>
+<div class="meta-row room-row">
+<div><span class="meta-label">Room Type:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Room Size:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
+</div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">Not recorded</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Concept%20Nisantasi%20Hotels%20&amp;%20Spa%20Mesrutiyet%20Mah.%20Sutlu%20Sok.%20No:6%20Osmanbey%20Sisli%2C%20Sisli%2C%2034363%20Istanbul%2C%20Türkiye&amp;output=embed'); return false;">Mesrutiyet Mah. Sutlu Sok. No:6 Osmanbey Sisli, Sisli, 34363 Istanbul, Türkiye</a></div>
+<div class="card-footer">
+<a class="link-pill" href="#" onclick="openWebsiteHub('Concept Nisantasi Hotels &amp; Spa','#'); return false;">Hotel Website</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Concept%20Nisantasi%20Hotels%20&amp;%20Spa%20Mesrutiyet%20Mah.%20Sutlu%20Sok.%20No:6%20Osmanbey%20Sisli%2C%20Sisli%2C%2034363%20Istanbul%2C%20Türkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openReservationHub('Concept Nisantasi Hotels &amp; Spa','Not recorded','Not recorded','Not recorded','17 Jun 2026 → 20 Jun 2026','Not recorded','Not recorded','#','#'); return false;">Online Reservation</a>
+<a class="link-pill" href="#" onclick="openExternalBrowser('Offline Reservation — Concept Nisantasi Hotels &amp; Spa','#'); return false;">Offline Reservation</a>
+</div>
+</article>
+</div>
+</section>
+<section>
+<div class="section-header">
+<div class="section-header-left"><span class="emoji">🚌</span> Jolly Tour · 20 Jun → 26 Jun</div>
+</div>
+<div class="cards">
+<article class="card stay-card summary-card 🚌-tour">
+<div class="card-header">
+<div>
+<div class="stay-chip">🚌 Tour</div>
+<div class="card-title">Jolly Tour — Ege Akdeniz</div>
+<div class="card-city">Aegean / Mediterranean touring segment</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="meta-label">Stay:</span> 6 nights</div>
+<div><span class="meta-label">Start:</span> 20 Jun 2026</div>
+<div><span class="meta-label">End:</span> 26 Jun 2026</div>
+</div>
+<div class="detail-row note-row"><span class="meta-label">Summary:</span> <span class="note-value">5-night Jolly Tour regional segment. Hotel and city details are not yet recorded.</span></div>
+<div class="meta-row room-row">
+<div><span class="meta-label">Tour:</span> <span class="room-value">Jolly Tour Ege Akdeniz</span></div><div><span class="meta-label">Accommodation:</span> <span class="room-value">Allocated by tour provider / details pending</span></div><div><span class="meta-label">Status:</span> <span class="room-value">Confirmed by Figen as covering this previous gap</span></div>
+</div>
+<div class="card-footer">
+<a class="link-pill disabled-pill" href="#" onclick="return false;">Details Pending</a>
+</div>
+</article>
+</div>
+</section>
+<section>
+<div class="section-header">
+<div class="section-header-left"><span class="emoji">🏨</span> Istanbul · 26 Jun → 29 Jun</div>
+</div>
+<div class="cards">
+<article class="card stay-card 🏨-hotel">
+<div class="card-header">
+<div>
+<div class="stay-chip">🏨 Hotel</div>
+<div class="card-title">Concept Nisantasi Hotels &amp; Spa</div>
+<div class="card-city">Istanbul</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="meta-label">Stay:</span> 3 nights</div>
+<div><span class="meta-label">Arrival:</span> 26 Jun 2026</div>
+<div><span class="meta-label">Depart:</span> 29 Jun 2026</div>
+<div><span class="meta-label">Check-in:</span> Not recorded</div>
+<div><span class="meta-label">Check-out:</span> Not recorded</div>
+</div>
+<div class="meta-row room-row">
+<div><span class="meta-label">Room Type:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Room Size:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
+</div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">Not recorded</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Concept%20Nisantasi%20Hotels%20&amp;%20Spa%20Mesrutiyet%20Mah.%20Sutlu%20Sok.%20No:6%20Osmanbey%20Sisli%2C%20Sisli%2C%2034363%20Istanbul%2C%20Türkiye&amp;output=embed'); return false;">Mesrutiyet Mah. Sutlu Sok. No:6 Osmanbey Sisli, Sisli, 34363 Istanbul, Türkiye</a></div>
+<div class="card-footer">
+<a class="link-pill" href="#" onclick="openWebsiteHub('Concept Nisantasi Hotels &amp; Spa','#'); return false;">Hotel Website</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Concept%20Nisantasi%20Hotels%20&amp;%20Spa%20Mesrutiyet%20Mah.%20Sutlu%20Sok.%20No:6%20Osmanbey%20Sisli%2C%20Sisli%2C%2034363%20Istanbul%2C%20Türkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openReservationHub('Concept Nisantasi Hotels &amp; Spa','Not recorded','Not recorded','Not recorded','26 Jun 2026 → 29 Jun 2026','Not recorded','Not recorded','#','#'); return false;">Online Reservation</a>
+<a class="link-pill" href="#" onclick="openExternalBrowser('Offline Reservation — Concept Nisantasi Hotels &amp; Spa','#'); return false;">Offline Reservation</a>
+</div>
+</article>
+</div>
+</section>
+<section>
+<div class="section-header">
+<div class="section-header-left"><span class="emoji">👨‍👩‍👧‍👦</span> Family Touring · 29 Jun → 13 Jul</div>
+</div>
+<div class="cards">
+<article class="card stay-card summary-card 👨‍👩‍👧‍👦-family-stay">
+<div class="card-header">
+<div>
+<div class="stay-chip">👨‍👩‍👧‍👦 Family Stay</div>
+<div class="card-title">Regional Family Travel</div>
+<div class="card-city">Village / Ankara / family travel by car</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="meta-label">Stay:</span> 14 nights</div>
+<div><span class="meta-label">Start:</span> 29 Jun 2026</div>
+<div><span class="meta-label">End:</span> 13 Jul 2026</div>
+</div>
+<div class="detail-row note-row"><span class="meta-label">Summary:</span> <span class="note-value">Travelling with cousins by car, including parents’ village and Ankara. Hotel details will be arranged locally after arriving in Türkiye.</span></div>
+<div class="meta-row room-row">
+<div><span class="meta-label">Transport:</span> <span class="room-value">Car with family</span></div><div><span class="meta-label">Accommodation:</span> <span class="room-value">Flexible / not yet booked</span></div><div><span class="meta-label">Status:</span> <span class="room-value">Details pending until arrival in Türkiye</span></div>
+</div>
+<div class="card-footer">
+<a class="link-pill disabled-pill" href="#" onclick="return false;">Details Pending</a>
+</div>
+</article>
+</div>
+</section>
+<section>
+<div class="section-header">
+<div class="section-header-left"><span class="emoji">🏨</span> Istanbul · 13 Jul → 14 Jul</div>
+</div>
+<div class="cards">
+<article class="card stay-card 🏨-hotel">
+<div class="card-header">
+<div>
+<div class="stay-chip">🏨 Hotel</div>
+<div class="card-title">Concept Nisantasi Hotels &amp; Spa</div>
+<div class="card-city">Istanbul</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="meta-label">Stay:</span> 1 night</div>
+<div><span class="meta-label">Arrival:</span> 13 Jul 2026</div>
+<div><span class="meta-label">Depart:</span> 14 Jul 2026</div>
+<div><span class="meta-label">Check-in:</span> Not recorded</div>
+<div><span class="meta-label">Check-out:</span> Not recorded</div>
+</div>
+<div class="meta-row room-row">
+<div><span class="meta-label">Room Type:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Room Size:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
+</div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">Not recorded</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Concept%20Nisantasi%20Hotels%20&amp;%20Spa%20Mesrutiyet%20Mah.%20Sutlu%20Sok.%20No:6%20Osmanbey%20Sisli%2C%20Sisli%2C%2034363%20Istanbul%2C%20Türkiye&amp;output=embed'); return false;">Mesrutiyet Mah. Sutlu Sok. No:6 Osmanbey Sisli, Sisli, 34363 Istanbul, Türkiye</a></div>
+<div class="card-footer">
+<a class="link-pill" href="#" onclick="openWebsiteHub('Concept Nisantasi Hotels &amp; Spa','#'); return false;">Hotel Website</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Concept%20Nisantasi%20Hotels%20&amp;%20Spa%20Mesrutiyet%20Mah.%20Sutlu%20Sok.%20No:6%20Osmanbey%20Sisli%2C%20Sisli%2C%2034363%20Istanbul%2C%20Türkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openReservationHub('Concept Nisantasi Hotels &amp; Spa','Not recorded','Not recorded','Not recorded','13 Jul 2026 → 14 Jul 2026','Not recorded','Not recorded','#','#'); return false;">Online Reservation</a>
+<a class="link-pill" href="#" onclick="openExternalBrowser('Offline Reservation — Concept Nisantasi Hotels &amp; Spa','#'); return false;">Offline Reservation</a>
+</div>
+</article>
+</div>
+</section>
+<section>
+<div class="section-header">
+<div class="section-header-left"><span class="emoji">🚌</span> Jolly Tour · 14 Jul → 18 Jul</div>
+</div>
+<div class="cards">
+<article class="card stay-card summary-card 🚌-tour">
+<div class="card-header">
+<div>
+<div class="stay-chip">🚌 Tour</div>
+<div class="card-title">Jolly Tour — Likya</div>
+<div class="card-city">Likya touring segment</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="meta-label">Stay:</span> 4 nights</div>
+<div><span class="meta-label">Start:</span> 14 Jul 2026</div>
+<div><span class="meta-label">End:</span> 18 Jul 2026</div>
+</div>
+<div class="detail-row note-row"><span class="meta-label">Summary:</span> <span class="note-value">Jolly Tour Likya segment. Figen referenced 4 nights / 3 nights; exact tour structure, hotels and cities still need confirmation.</span></div>
+<div class="meta-row room-row">
+<div><span class="meta-label">Tour:</span> <span class="room-value">Jolly Tour Likya</span></div><div><span class="meta-label">Accommodation:</span> <span class="room-value">Allocated by tour provider / details pending</span></div><div><span class="meta-label">Status:</span> <span class="room-value">Confirmed by Figen as covering this previous gap</span></div>
+</div>
+<div class="card-footer">
+<a class="link-pill disabled-pill" href="#" onclick="return false;">Details Pending</a>
+</div>
+</article>
+</div>
+</section>
+<section>
+<div class="section-header">
+<div class="section-header-left"><span class="emoji">🏥</span> Istanbul · 18 Jul → 31 Jul</div>
+</div>
+<div class="cards">
+<article class="card stay-card 🏥-recovery-stay">
+<div class="card-header">
+<div>
+<div class="stay-chip">🏥 Recovery Stay</div>
+<div class="card-title">Istanbul Gonen Hotel</div>
+<div class="card-city">Istanbul</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="meta-label">Stay:</span> 13 nights</div>
+<div><span class="meta-label">Arrival:</span> 18 Jul 2026</div>
+<div><span class="meta-label">Depart:</span> 31 Jul 2026</div>
+<div><span class="meta-label">Check-in:</span> Not recorded</div>
+<div><span class="meta-label">Check-out:</span> Not recorded</div>
+</div>
+<div class="meta-row room-row">
+<div><span class="meta-label">Room Type:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Room Size:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
+</div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">Not recorded</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Istanbul%20Gonen%20Hotel%20Degirmenbahce%20Caddesi%20No:15%20Yenibosna%2C%20Bahcelievler%2C%2034197%20Istanbul%2C%20Türkiye&amp;output=embed'); return false;">Degirmenbahce Caddesi No:15 Yenibosna, Bahcelievler, 34197 Istanbul, Türkiye</a></div>
+<div class="detail-row note-row"><span class="meta-label">Note:</span> <span class="note-value">Main family room after surgery / recovery period.</span></div>
+<div class="card-footer">
+<a class="link-pill" href="#" onclick="openWebsiteHub('Istanbul Gonen Hotel','#'); return false;">Hotel Website</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Istanbul%20Gonen%20Hotel%20Degirmenbahce%20Caddesi%20No:15%20Yenibosna%2C%20Bahcelievler%2C%2034197%20Istanbul%2C%20Türkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openReservationHub('Istanbul Gonen Hotel','Not recorded','Not recorded','Not recorded','18 Jul 2026 → 31 Jul 2026','Not recorded','Not recorded','#','#'); return false;">Online Reservation</a>
+<a class="link-pill" href="#" onclick="openExternalBrowser('Offline Reservation — Istanbul Gonen Hotel','#'); return false;">Offline Reservation</a>
+</div>
+</article>
+</div>
+</section>
+<section>
+<div class="section-header">
+<div class="section-header-left"><span class="emoji">👨‍👩‍👧‍👦</span> Istanbul · 19 Jul → 22 Jul</div>
+</div>
+<div class="cards">
+<article class="card stay-card 👨‍👩‍👧‍👦-support-room">
+<div class="card-header">
+<div>
+<div class="stay-chip">👨‍👩‍👧‍👦 Support Room</div>
+<div class="card-title">Istanbul Gonen Hotel</div>
+<div class="card-city">Istanbul</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="meta-label">Stay:</span> 3 nights</div>
+<div><span class="meta-label">Arrival:</span> 19 Jul 2026</div>
+<div><span class="meta-label">Depart:</span> 22 Jul 2026</div>
+<div><span class="meta-label">Check-in:</span> Not recorded</div>
+<div><span class="meta-label">Check-out:</span> Not recorded</div>
+</div>
+<div class="meta-row room-row">
+<div><span class="meta-label">Room Type:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Room Size:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
+<div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
+</div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">Not recorded</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Istanbul%20Gonen%20Hotel%20Degirmenbahce%20Caddesi%20No:15%20Yenibosna%2C%20Bahcelievler%2C%2034197%20Istanbul%2C%20Türkiye&amp;output=embed'); return false;">Degirmenbahce Caddesi No:15 Yenibosna, Bahcelievler, 34197 Istanbul, Türkiye</a></div>
+<div class="detail-row note-row"><span class="meta-label">Note:</span> <span class="note-value">Additional room for cousin assisting mother while Figen is in hospital recovering.</span></div>
+<div class="card-footer">
+<a class="link-pill" href="#" onclick="openWebsiteHub('Istanbul Gonen Hotel','#'); return false;">Hotel Website</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Istanbul%20Gonen%20Hotel%20Degirmenbahce%20Caddesi%20No:15%20Yenibosna%2C%20Bahcelievler%2C%2034197%20Istanbul%2C%20Türkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openReservationHub('Istanbul Gonen Hotel','Not recorded','Not recorded','Not recorded','19 Jul 2026 → 22 Jul 2026','Not recorded','Not recorded','#','#'); return false;">Online Reservation</a>
+<a class="link-pill" href="#" onclick="openExternalBrowser('Offline Reservation — Istanbul Gonen Hotel','#'); return false;">Offline Reservation</a>
+</div>
+</article>
+</div>
+</section>
+<section>
+<div class="section-header">
+<div class="section-header-left"><span class="emoji">📍</span> Flexible / Unplanned · 31 Jul → 12 Aug</div>
+</div>
+<div class="cards">
+<article class="card stay-card summary-card 📍-flexible">
+<div class="card-header">
+<div>
+<div class="stay-chip">📍 Flexible</div>
+<div class="card-title">Flexible Accommodation Segment</div>
+<div class="card-city">Location not yet confirmed</div>
+</div>
+</div>
+<div class="meta-row">
+<div><span class="meta-label">Stay:</span> 12 nights</div>
+<div><span class="meta-label">Start:</span> 31 Jul 2026</div>
+<div><span class="meta-label">End:</span> 12 Aug 2026</div>
+</div>
+<div class="detail-row note-row"><span class="meta-label">Summary:</span> <span class="note-value">Accommodation has not yet been booked. Figen has confirmed she does not yet know where she will be during this period.</span></div>
+<div class="meta-row room-row">
+<div><span class="meta-label">Accommodation:</span> <span class="room-value">Not yet booked</span></div><div><span class="meta-label">Location:</span> <span class="room-value">Unknown</span></div><div><span class="meta-label">Status:</span> <span class="room-value">Open item</span></div>
+</div>
+<div class="card-footer">
+<a class="link-pill disabled-pill" href="#" onclick="return false;">Details Pending</a>
+</div>
+</article>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- OSAKA #1 -->
+
+<!-- OKINAWA -->
+
+<!-- FUKUOKA -->
+
+<!-- OSAKA #2 -->
+
+<div class="toolbar" style="justify-content:center; margin: 28px 0 0;">
+<a class="pill-button" href="https://tr-fh-2026-jun-aug.trekworks.org/" style="color:#2563eb;">
+      ← Back to Trip Home
+    </a>
+</div>
+<footer class="footer-nav">
+<div class="footer-line desktop-only">
+      For flights, see
+      <a href="https://tr-fh-2026-jun-aug.trekworks.org/flights.html">Flights</a>.
+      For tours and regional movements, see
+      <a href="https://tr-fh-2026-jun-aug.trekworks.org/tours-and-regional-travel.html">Tours and Regional Travel</a>.
+      For airport transfers and local transport, see
+      <a href="https://tr-fh-2026-jun-aug.trekworks.org/transfers-and-transport.html">Transfers and Transport</a>.
+      For surgery and recovery support, see
+      <a href="https://tr-fh-2026-jun-aug.trekworks.org/medical-and-recovery.html">Medical and Recovery</a>.
+</div>
+<div class="footer-line mobile-only">
+      For flights, see
+      <a href="https://tr-fh-2026-jun-aug.trekworks.org/flights.html">Flights</a>.
+      For tours and regional movements, see
+      <a href="https://tr-fh-2026-jun-aug.trekworks.org/tours-and-regional-travel.html">Tours and Regional Travel</a>.
+      For airport transfers and local transport, see
+      <a href="https://tr-fh-2026-jun-aug.trekworks.org/transfers-and-transport.html">Transfers and Transport</a>.
+      For surgery and recovery support, see
+      <a href="https://tr-fh-2026-jun-aug.trekworks.org/medical-and-recovery.html">Medical and Recovery</a>.
+</div>
+</footer>
+</main>
+<div class="map-modal" id="mapModal">
+<div class="map-modal-header">
+<div class="map-modal-title">Map</div>
+<button class="map-modal-close" onclick="closeMapModal()">X Close</button>
+</div>
+<iframe id="mapFrame" loading="lazy" src=""></iframe>
+</div>
+<div class="website-modal" id="websiteModal">
+<div aria-labelledby="websiteModalTitle" aria-modal="true" class="website-panel" role="dialog">
+<div class="website-modal-header">
+<div class="website-modal-kicker">Hotel website</div>
+<div class="website-modal-title" id="websiteModalTitle">Hotel Website</div>
+</div>
+<div class="website-modal-body">
+<div class="website-detail-grid">
+<div class="website-detail">
+<div class="website-detail-label">Hotel</div>
+<div class="website-detail-value" id="websiteHotel">—</div>
+</div>
+<div class="website-detail">
+<div class="website-detail-label">Website</div>
+<div class="website-detail-value" id="websiteUrl">—</div>
+</div>
+</div>
+<div class="website-modal-actions">
+<a class="website-action primary" href="#" id="websiteExternalLink" onclick="openWebsiteExternal(); return false;">Open Hotel Website</a>
+<button class="website-modal-close" onclick="closeWebsiteHub()">Close</button>
+</div>
+</div>
+</div>
+</div>
+<div class="website-browser-modal" id="websiteBrowserModal">
+<div class="website-browser-modal-header">
+<div class="website-browser-modal-title" id="websiteBrowserTitle">Hotel Website</div>
+<button class="website-browser-modal-close" onclick="closeWebsiteBrowser()">X Close</button>
+</div>
+<iframe id="websiteBrowserFrame" loading="lazy" src=""></iframe>
+</div>
+<div class="reservation-modal" id="reservationModal">
+<div aria-labelledby="reservationModalTitle" aria-modal="true" class="reservation-panel" role="dialog">
+<div class="reservation-modal-header">
+<div class="reservation-modal-kicker">Reservation details</div>
+<div class="reservation-modal-title" id="reservationModalTitle">Reservation</div>
+</div>
+<div class="reservation-modal-body">
+<div class="reservation-detail-grid">
+<div class="reservation-detail full-width">
+<div class="reservation-detail-label">Hotel</div>
+<div class="reservation-detail-value" id="reservationHotel">—</div>
+</div>
+<div class="reservation-detail">
+<div class="reservation-detail-label">Booking provider</div>
+<div class="reservation-detail-value" id="reservationProvider">—</div>
+</div>
+<div class="reservation-detail">
+<div class="reservation-detail-label">Confirmation number</div>
+<div class="reservation-detail-value" id="reservationNumber">—</div>
+</div>
+<div class="reservation-detail">
+<div class="reservation-detail-label">Provider reference</div>
+<div class="reservation-detail-value" id="reservationProviderReference">—</div>
+</div>
+<div class="reservation-detail full-width">
+<div class="reservation-detail-label">Stay dates</div>
+<div class="reservation-detail-value" id="reservationDates">—</div>
+</div>
+<div class="reservation-detail">
+<div class="reservation-detail-label">Check-in</div>
+<div class="reservation-detail-value" id="reservationCheckIn">—</div>
+</div>
+<div class="reservation-detail">
+<div class="reservation-detail-label">Check-out</div>
+<div class="reservation-detail-value" id="reservationCheckOut">—</div>
+</div>
+</div>
+<div class="reservation-modal-actions">
+<a class="reservation-action primary" href="#" id="reservationExternalLink" onclick="openReservationExternal(); return false;">Open Reservation</a>
+<a class="reservation-action" href="#" id="reservationHotelLink" onclick="openHotelExternal(); return false;">Open Hotel Website</a>
+<button class="reservation-modal-close" onclick="closeReservationHub()">Close</button>
+</div>
+</div>
+</div>
+</div>
+<div class="offline-overlay" id="offlineOverlay">
+<div class="offline-box">
+<h2>You’re offline</h2>
+<p>
+      This content requires an internet connection.<br/>
+      You can continue using other parts of the app while offline.
+    </p>
+<button onclick="closeOffline()">OK</button>
+</div>
+</div>
+<script>
+function openMapModal(url) {
+  verifyConnectivity()
+    .then(function () {
+      document.getElementById('mapFrame').src = url;
+      document.getElementById('mapModal').style.display = 'flex';
+    })
+    .catch(showOffline);
+}
+
+function closeMapModal() {
+  document.getElementById('mapFrame').src = '';
+  document.getElementById('mapModal').style.display = 'none';
+}
+
+let currentWebsiteUrl = '';
+
+function openWebsiteHub(hotel, websiteUrl) {
+  currentWebsiteUrl = websiteUrl;
+
+  document.getElementById('websiteModalTitle').textContent = hotel;
+  document.getElementById('websiteHotel').textContent = hotel;
+  document.getElementById('websiteUrl').textContent = websiteUrl;
+  document.getElementById('websiteExternalLink').href = websiteUrl;
+  document.getElementById('websiteModal').style.display = 'flex';
+}
+
+function closeWebsiteHub() {
+  document.getElementById('websiteModal').style.display = 'none';
+}
+
+function openWebsiteExternal() {
+  if (currentWebsiteUrl) {
+    openWebsiteBrowser(currentWebsiteUrl);
+  }
+}
+
+function openWebsiteBrowser(url) {
+  verifyConnectivity()
+    .then(function () {
+      document.getElementById('websiteBrowserTitle').textContent = document.getElementById('websiteModalTitle').textContent || 'Hotel Website';
+      document.getElementById('websiteBrowserFrame').src = 'external.html?url=' + encodeURIComponent(url);
+      document.getElementById('websiteModal').style.display = 'none';
+      document.getElementById('websiteBrowserModal').style.display = 'flex';
+    })
+    .catch(showOffline);
+}
+
+function closeWebsiteBrowser() {
+  document.getElementById('websiteBrowserFrame').src = '';
+  document.getElementById('websiteBrowserModal').style.display = 'none';
+}
+
+
+function openExternalBrowser(title, url, launchMode) {
+  verifyConnectivity()
+    .then(function () {
+      const browserTitle = document.getElementById('websiteBrowserTitle');
+      const frame = document.getElementById('websiteBrowserFrame');
+
+      browserTitle.textContent = title || 'External Link';
+
+      if (launchMode) {
+        const safeTitle = escapeHtml(title || 'Open link');
+        const safeUrl = escapeHtml(url);
+        frame.srcdoc = `
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <style>
+              * { box-sizing: border-box; }
+              body {
+                margin: 0;
+                min-height: 100vh;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+                color: #f9fafb;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 18px;
+              }
+              .launch-card {
+                width: min(520px, 100%);
+                background: linear-gradient(145deg, #0b1020, #111827);
+                border: 1px solid rgba(255,255,255,0.12);
+                border-radius: 22px;
+                box-shadow: 0 18px 45px rgba(0,0,0,0.65);
+                padding: 20px;
+                text-align: center;
+              }
+              h1 {
+                margin: 0 0 10px;
+                font-size: 20px;
+                line-height: 1.25;
+              }
+              p {
+                margin: 0 0 16px;
+                color: #b5bed5;
+                font-size: 14px;
+                line-height: 1.45;
+              }
+              .url {
+                margin: 0 0 16px;
+                padding: 10px 12px;
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 14px;
+                background: rgba(2,6,23,0.55);
+                color: #9ca3af;
+                font-size: 12px;
+                overflow-wrap: anywhere;
+                text-align: left;
+              }
+              a {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                border-radius: 999px;
+                border: 1px solid rgba(147,197,253,0.45);
+                background: rgba(37,99,235,0.12);
+                color: #93c5fd;
+                padding: 10px 14px;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 600;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="launch-card">
+              <h1>${safeTitle}</h1>
+              <p>This reservation page is opened directly because the booking provider blocks embedded views.</p>
+              <div class="url">${safeUrl}</div>
+              <a href="${safeUrl}" target="_blank" rel="noopener">Open Online Reservation</a>
+            </div>
+          </body>
+          </html>`;
+      } else {
+        frame.removeAttribute('srcdoc');
+        frame.src = 'external.html?url=' + encodeURIComponent(url);
+      }
+
+      document.getElementById('websiteBrowserModal').style.display = 'flex';
+    })
+    .catch(showOffline);
+}
+
+function escapeHtml(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+let currentReservationUrl = '';
+let currentHotelUrl = '';
+
+function openReservationHub(hotel, provider, confirmation, providerReference, dates, checkIn, checkOut, reservationUrl, hotelUrl) {
+  currentReservationUrl = reservationUrl;
+  currentHotelUrl = hotelUrl;
+
+  document.getElementById('reservationModalTitle').textContent = hotel;
+  document.getElementById('reservationHotel').textContent = hotel;
+  document.getElementById('reservationProvider').textContent = provider;
+  document.getElementById('reservationNumber').textContent = confirmation || 'Not recorded';
+  document.getElementById('reservationProviderReference').textContent = providerReference || 'Not recorded';
+  document.getElementById('reservationDates').textContent = dates;
+  document.getElementById('reservationCheckIn').textContent = checkIn;
+  document.getElementById('reservationCheckOut').textContent = checkOut;
+  document.getElementById('reservationExternalLink').href = reservationUrl;
+  document.getElementById('reservationHotelLink').href = hotelUrl;
+  document.getElementById('reservationModal').style.display = 'flex';
+}
+
+function closeReservationHub() {
+  document.getElementById('reservationModal').style.display = 'none';
+}
+
+function openReservationExternal() {
+  if (currentReservationUrl) {
+    openExternalBrowser(
+      'Online Reservation — ' + (document.getElementById('reservationModalTitle').textContent || 'Reservation'),
+      currentReservationUrl,
+      true
+    );
+    closeReservationHub();
+  }
+}
+
+function openHotelExternal() {
+  if (currentHotelUrl) {
+    openExternalBrowser(
+      'Hotel Website — ' + (document.getElementById('reservationModalTitle').textContent || 'Hotel Website'),
+      currentHotelUrl,
+      false
+    );
+    closeReservationHub();
+  }
+}
+
+function handleExternal(url) {
+  verifyConnectivity()
+    .then(function () {
+      window.location.href = 'external.html?url=' + encodeURIComponent(url);
+    })
+    .catch(showOffline);
+}
+
+function verifyConnectivity() {
+  return new Promise(function (resolve, reject) {
+    const controller = new AbortController();
+    const timeout = setTimeout(function () {
+      controller.abort();
+      reject();
+    }, 800);
+
+    fetch('external.html', {
+      cache: 'no-store',
+      signal: controller.signal
+    })
+      .then(function () {
+        clearTimeout(timeout);
+        resolve();
+      })
+      .catch(function () {
+        clearTimeout(timeout);
+        reject();
+      });
+  });
+}
+
+function showOffline() {
+  document.getElementById('offlineOverlay').style.display = 'flex';
+}
+
+function closeOffline() {
+  document.getElementById('offlineOverlay').style.display = 'none';
+}
+</script>
+</body>
+</html>
