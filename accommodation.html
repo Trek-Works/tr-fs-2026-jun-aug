@@ -1122,16 +1122,26 @@ function openWebsiteExternal() {
 function openWebsiteBrowser(url) {
   verifyConnectivity()
     .then(function () {
-      document.getElementById('websiteBrowserTitle').textContent = document.getElementById('websiteModalTitle').textContent || 'Hotel Website';
-      document.getElementById('websiteBrowserFrame').src = url;
-      document.getElementById('websiteModal').style.display = 'none';
-      document.getElementById('websiteBrowserModal').style.display = 'flex';
+      const frame = document.getElementById('websiteBrowserFrame');
+      frame.srcdoc = '';
+      frame.removeAttribute('srcdoc');
+      frame.src = 'about:blank';
+
+      setTimeout(function () {
+        document.getElementById('websiteBrowserTitle').textContent = document.getElementById('websiteModalTitle').textContent || 'Hotel Website';
+        frame.src = url;
+        document.getElementById('websiteModal').style.display = 'none';
+        document.getElementById('websiteBrowserModal').style.display = 'flex';
+      }, 0);
     })
     .catch(showOffline);
 }
 
 function closeWebsiteBrowser() {
-  document.getElementById('websiteBrowserFrame').src = '';
+  const frame = document.getElementById('websiteBrowserFrame');
+  frame.srcdoc = '';
+  frame.removeAttribute('srcdoc');
+  frame.src = 'about:blank';
   document.getElementById('websiteBrowserModal').style.display = 'none';
 }
 
@@ -1216,15 +1226,19 @@ function openExternalBrowser(title, url, launchMode) {
           <body>
             <div class="launch-card">
               <h1>${safeTitle}</h1>
-              <p>This reservation page is opened directly because the booking provider blocks embedded views.</p>
+              <p>This hotel website is opened directly because the website blocks embedded views.</p>
               <div class="url">${safeUrl}</div>
-              <a href="${safeUrl}" target="_blank" rel="noopener">Open Online Reservation</a>
+              <a href="${safeUrl}" target="_blank" rel="noopener">Open Hotel Website</a>
             </div>
           </body>
           </html>`;
       } else {
+        frame.srcdoc = '';
         frame.removeAttribute('srcdoc');
-        frame.src = url;
+        frame.src = 'about:blank';
+        setTimeout(function () {
+          frame.src = url;
+        }, 0);
       }
 
       document.getElementById('websiteBrowserModal').style.display = 'flex';
