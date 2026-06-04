@@ -283,6 +283,14 @@
       padding-right: 12px;
     }
 
+    .map-modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    .map-modal-open,
     .map-modal-close,
     .website-browser-modal-close {
       border: 1px solid rgba(37,99,235,0.16);
@@ -293,6 +301,7 @@
       font-size: 13px;
       cursor: pointer;
       flex: 0 0 auto;
+      text-decoration: none;
     }
 
     .map-modal iframe,
@@ -598,10 +607,10 @@
 <div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
 <div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
 </div>
-<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 212 252 71 60</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Asmal%C4%B1%20Mescit%2C%20Oteller%20Sk.%20No%3A1%20D%3A3%2C%2034430%20Beyo%C4%9Flu/%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">Asmalı Mescit, Oteller Sk. No:1 D:3, 34430 Beyoğlu/İstanbul, Türkiye</a></div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 212 252 71 60</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Ramada%20By%20Wyndham%20Istanbul%20Pera%20Taksim&amp;output=embed','https://maps.app.goo.gl/aPB6w2q2TCuU1f1t7'); return false;">Asmalı Mescit, Oteller Sk. No:1 D:3, 34430 Beyoğlu/İstanbul, Türkiye</a></div>
 <div class="card-footer">
 <a class="link-pill" href="#" onclick="openWebsiteHub('Ramada By Wyndham Istanbul Pera Taksim','https://www.wyndhamhotels.com/ramada/istanbul-turkiye/ramada-istanbul-pera/overview'); return false;">Hotel Website</a>
-<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Asmal%C4%B1%20Mescit%2C%20Oteller%20Sk.%20No%3A1%20D%3A3%2C%2034430%20Beyo%C4%9Flu/%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Ramada%20By%20Wyndham%20Istanbul%20Pera%20Taksim&amp;output=embed','https://maps.app.goo.gl/aPB6w2q2TCuU1f1t7'); return false;">View Map</a>
 <a class="link-pill" href="#" onclick="openReservationHub('Ramada By Wyndham Istanbul Pera Taksim','Booking.com','Not recorded','Not recorded','06 Jun 2026 → 10 Jun 2026','2:00 PM','12:00 PM','https://www.booking.com/','https://www.wyndhamhotels.com/ramada/istanbul-turkiye/ramada-istanbul-pera/overview'); return false;">Online Reservation</a>
 </div>
 </article>
@@ -633,11 +642,11 @@
 <div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
 <div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
 </div>
-<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 242 431 26 00</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Kundu%20Mahallesi%20Ya%C5%9Far%20Sobutay%20Bulvar%C4%B1%20No%3A100%2C%2007112%20Aksu%2C%20Antalya%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">Kundu Mahallesi Yaşar Sobutay Bulvarı No:100, 07112 Aksu, Antalya, Türkiye</a></div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 242 431 26 00</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Swandor%20Hotels%20%26%20Resorts%20-%20Topkapi%20Palace&amp;output=embed','https://maps.app.goo.gl/kcxLY2m56f2Kqwu19'); return false;">Kundu Mahallesi Yaşar Sobutay Bulvarı No:100, 07112 Aksu, Antalya, Türkiye</a></div>
 <div class="detail-row note-row"><span class="meta-label">Note:</span> <span class="note-value">Turkish Airlines domestic flights expected for Istanbul ↔ Antalya. Exact flight details not yet recorded.</span></div>
 <div class="card-footer">
 <a class="link-pill" href="#" onclick="openWebsiteHub('Swandor Hotels &amp; Resorts - Topkapi Palace','https://www.swandorhotels.com/swandor-topkapi-palace/home'); return false;">Hotel Website</a>
-<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Kundu%20Mahallesi%20Ya%C5%9Far%20Sobutay%20Bulvar%C4%B1%20No%3A100%2C%2007112%20Aksu%2C%20Antalya%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Swandor%20Hotels%20%26%20Resorts%20-%20Topkapi%20Palace&amp;output=embed','https://maps.app.goo.gl/kcxLY2m56f2Kqwu19'); return false;">View Map</a>
 <a class="link-pill" href="#" onclick="openReservationHub('Swandor Hotels &amp; Resorts - Topkapi Palace','Booking.com','Not recorded','Not recorded','10 Jun 2026 → 17 Jun 2026','2:00 PM','12:00 PM','https://www.booking.com/','https://www.swandorhotels.com/swandor-topkapi-palace/home'); return false;">Online Reservation</a>
 </div>
 </article>
@@ -669,10 +678,10 @@
 <div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
 <div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
 </div>
-<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 212 230 33 66</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Me%C5%9Frutiyet%20Mahallesi%2C%20Melek%20Sokak%20No%3A6%2C%20%C5%9Ei%C5%9Fli%2C%20%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">Meşrutiyet Mahallesi, Melek Sokak No:6, Şişli, İstanbul, Türkiye</a></div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 212 230 33 66</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Concept%20Nisantasi%20Hotels%20%26%20Spa&amp;output=embed','https://maps.app.goo.gl/wKA8SYTHCbcY5zkK9'); return false;">Meşrutiyet Mahallesi, Melek Sokak No:6, Şişli, İstanbul, Türkiye</a></div>
 <div class="card-footer">
 <a class="link-pill" href="#" onclick="openWebsiteHub('Concept Nisantasi Hotels &amp; Spa','https://www.concepthotels.com.tr/concept-nisantasi-'); return false;">Hotel Website</a>
-<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Me%C5%9Frutiyet%20Mahallesi%2C%20Melek%20Sokak%20No%3A6%2C%20%C5%9Ei%C5%9Fli%2C%20%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Concept%20Nisantasi%20Hotels%20%26%20Spa&amp;output=embed','https://maps.app.goo.gl/wKA8SYTHCbcY5zkK9'); return false;">View Map</a>
 <a class="link-pill" href="#" onclick="openReservationHub('Concept Nisantasi Hotels &amp; Spa','Booking.com','Not recorded','Not recorded','17 Jun 2026 → 20 Jun 2026','2:00 PM','12:00 PM','https://www.booking.com/','https://www.concepthotels.com.tr/concept-nisantasi-'); return false;">Online Reservation</a>
 </div>
 </article>
@@ -732,10 +741,10 @@
 <div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
 <div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
 </div>
-<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 212 230 33 66</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Me%C5%9Frutiyet%20Mahallesi%2C%20Melek%20Sokak%20No%3A6%2C%20%C5%9Ei%C5%9Fli%2C%20%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">Meşrutiyet Mahallesi, Melek Sokak No:6, Şişli, İstanbul, Türkiye</a></div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 212 230 33 66</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Concept%20Nisantasi%20Hotels%20%26%20Spa&amp;output=embed','https://maps.app.goo.gl/wKA8SYTHCbcY5zkK9'); return false;">Meşrutiyet Mahallesi, Melek Sokak No:6, Şişli, İstanbul, Türkiye</a></div>
 <div class="card-footer">
 <a class="link-pill" href="#" onclick="openWebsiteHub('Concept Nisantasi Hotels &amp; Spa','https://www.concepthotels.com.tr/concept-nisantasi-'); return false;">Hotel Website</a>
-<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Me%C5%9Frutiyet%20Mahallesi%2C%20Melek%20Sokak%20No%3A6%2C%20%C5%9Ei%C5%9Fli%2C%20%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Concept%20Nisantasi%20Hotels%20%26%20Spa&amp;output=embed','https://maps.app.goo.gl/wKA8SYTHCbcY5zkK9'); return false;">View Map</a>
 <a class="link-pill" href="#" onclick="openReservationHub('Concept Nisantasi Hotels &amp; Spa','Booking.com','Not recorded','Not recorded','26 Jun 2026 → 29 Jun 2026','2:00 PM','12:00 PM','https://www.booking.com/','https://www.concepthotels.com.tr/concept-nisantasi-'); return false;">Online Reservation</a>
 </div>
 </article>
@@ -795,10 +804,10 @@
 <div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
 <div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
 </div>
-<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 212 230 33 66</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Me%C5%9Frutiyet%20Mahallesi%2C%20Melek%20Sokak%20No%3A6%2C%20%C5%9Ei%C5%9Fli%2C%20%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">Meşrutiyet Mahallesi, Melek Sokak No:6, Şişli, İstanbul, Türkiye</a></div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 212 230 33 66</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Concept%20Nisantasi%20Hotels%20%26%20Spa&amp;output=embed','https://maps.app.goo.gl/wKA8SYTHCbcY5zkK9'); return false;">Meşrutiyet Mahallesi, Melek Sokak No:6, Şişli, İstanbul, Türkiye</a></div>
 <div class="card-footer">
 <a class="link-pill" href="#" onclick="openWebsiteHub('Concept Nisantasi Hotels &amp; Spa','https://www.concepthotels.com.tr/concept-nisantasi-'); return false;">Hotel Website</a>
-<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Me%C5%9Frutiyet%20Mahallesi%2C%20Melek%20Sokak%20No%3A6%2C%20%C5%9Ei%C5%9Fli%2C%20%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Concept%20Nisantasi%20Hotels%20%26%20Spa&amp;output=embed','https://maps.app.goo.gl/wKA8SYTHCbcY5zkK9'); return false;">View Map</a>
 <a class="link-pill" href="#" onclick="openReservationHub('Concept Nisantasi Hotels &amp; Spa','Booking.com','Not recorded','Not recorded','13 Jul 2026 → 14 Jul 2026','2:00 PM','12:00 PM','https://www.booking.com/','https://www.concepthotels.com.tr/concept-nisantasi-'); return false;">Online Reservation</a>
 </div>
 </article>
@@ -858,11 +867,11 @@
 <div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
 <div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
 </div>
-<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 212 454 66 66</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Yenibosna%20Merkez%20Mahallesi%2C%20De%C4%9Firmenbah%C3%A7e%20Cd%20No%3A15%2C%2034197%20Bah%C3%A7elievler/%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">Yenibosna Merkez Mahallesi, Değirmenbahçe Cd No:15, 34197 Bahçelievler/İstanbul, Türkiye</a></div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 212 454 66 66</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Istanbul%20Gonen%20Hotel&amp;output=embed','https://maps.app.goo.gl/JMJpBLfgCootn7CN8'); return false;">Yenibosna Merkez Mahallesi, Değirmenbahçe Cd No:15, 34197 Bahçelievler/İstanbul, Türkiye</a></div>
 <div class="detail-row note-row"><span class="meta-label">Note:</span> <span class="note-value">Main family room after surgery / recovery period.</span></div>
 <div class="card-footer">
 <a class="link-pill" href="#" onclick="openWebsiteHub('Istanbul Gonen Hotel','https://istanbulgonenhotel.com/'); return false;">Hotel Website</a>
-<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Yenibosna%20Merkez%20Mahallesi%2C%20De%C4%9Firmenbah%C3%A7e%20Cd%20No%3A15%2C%2034197%20Bah%C3%A7elievler/%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Istanbul%20Gonen%20Hotel&amp;output=embed','https://maps.app.goo.gl/JMJpBLfgCootn7CN8'); return false;">View Map</a>
 <a class="link-pill" href="#" onclick="openReservationHub('Istanbul Gonen Hotel','Booking.com','Not recorded','Not recorded','18 Jul 2026 → 31 Jul 2026','2:00 PM','12:00 PM','https://www.booking.com/','https://istanbulgonenhotel.com/'); return false;">Online Reservation</a>
 </div>
 </article>
@@ -894,11 +903,11 @@
 <div><span class="meta-label">Bed:</span> <span class="room-value">Not recorded</span></div>
 <div><span class="meta-label">Included:</span> <span class="room-value">Not recorded</span></div>
 </div>
-<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 212 454 66 66</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Yenibosna%20Merkez%20Mahallesi%2C%20De%C4%9Firmenbah%C3%A7e%20Cd%20No%3A15%2C%2034197%20Bah%C3%A7elievler/%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">Yenibosna Merkez Mahallesi, Değirmenbahçe Cd No:15, 34197 Bahçelievler/İstanbul, Türkiye</a></div>
+<div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 212 454 66 66</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Istanbul%20Gonen%20Hotel&amp;output=embed','https://maps.app.goo.gl/JMJpBLfgCootn7CN8'); return false;">Yenibosna Merkez Mahallesi, Değirmenbahçe Cd No:15, 34197 Bahçelievler/İstanbul, Türkiye</a></div>
 <div class="detail-row note-row"><span class="meta-label">Note:</span> <span class="note-value">Additional room for cousin assisting mother while Figen is in hospital recovering.</span></div>
 <div class="card-footer">
 <a class="link-pill" href="#" onclick="openWebsiteHub('Istanbul Gonen Hotel','https://istanbulgonenhotel.com/'); return false;">Hotel Website</a>
-<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Yenibosna%20Merkez%20Mahallesi%2C%20De%C4%9Firmenbah%C3%A7e%20Cd%20No%3A15%2C%2034197%20Bah%C3%A7elievler/%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">View Map</a>
+<a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Istanbul%20Gonen%20Hotel&amp;output=embed','https://maps.app.goo.gl/JMJpBLfgCootn7CN8'); return false;">View Map</a>
 <a class="link-pill" href="#" onclick="openReservationHub('Istanbul Gonen Hotel','Booking.com','Not recorded','Not recorded','19 Jul 2026 → 22 Jul 2026','2:00 PM','12:00 PM','https://www.booking.com/','https://istanbulgonenhotel.com/'); return false;">Online Reservation</a>
 </div>
 </article>
@@ -967,7 +976,10 @@
 <div class="map-modal" id="mapModal">
 <div class="map-modal-header">
 <div class="map-modal-title">Map</div>
+<div class="map-modal-actions">
+<a class="map-modal-open" href="#" id="mapExternalLink" onclick="openMapExternal(); return false;">Open in Google Maps</a>
 <button class="map-modal-close" onclick="closeMapModal()">X Close</button>
+</div>
 </div>
 <iframe id="mapFrame" loading="lazy" src=""></iframe>
 </div>
@@ -1058,9 +1070,16 @@
 </div>
 </div>
 <script>
-function openMapModal(url) {
+let currentMapExternalUrl = '';
+
+function openMapModal(url, externalUrl) {
+  currentMapExternalUrl = externalUrl || url;
   verifyConnectivity()
     .then(function () {
+      const externalLink = document.getElementById('mapExternalLink');
+      if (externalLink) {
+        externalLink.href = currentMapExternalUrl;
+      }
       document.getElementById('mapFrame').src = url;
       document.getElementById('mapModal').style.display = 'flex';
     })
@@ -1070,6 +1089,12 @@ function openMapModal(url) {
 function closeMapModal() {
   document.getElementById('mapFrame').src = '';
   document.getElementById('mapModal').style.display = 'none';
+}
+
+function openMapExternal() {
+  if (currentMapExternalUrl) {
+    handleExternal(currentMapExternalUrl);
+  }
 }
 
 let currentWebsiteUrl = '';
