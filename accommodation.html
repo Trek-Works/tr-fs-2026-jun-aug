@@ -600,9 +600,9 @@
 </div>
 <div class="detail-row phone-row"><span class="meta-label">Phone:</span> <span class="phone-value">+90 212 252 71 60</span>    <span class="meta-label">Address:</span> <a href="#" onclick="openMapModal('https://www.google.com/maps?q=Asmal%C4%B1%20Mescit%2C%20Oteller%20Sk.%20No%3A1%20D%3A3%2C%2034430%20Beyo%C4%9Flu/%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">Asmalı Mescit, Oteller Sk. No:1 D:3, 34430 Beyoğlu/İstanbul, Türkiye</a></div>
 <div class="card-footer">
-<a class="link-pill" href="#" onclick="openWebsiteHub('Ramada By Wyndham Istanbul Pera Taksim','https://www.wyndhamhotels.com/'); return false;">Hotel Website</a>
+<a class="link-pill" href="#" onclick="openWebsiteHub('Ramada By Wyndham Istanbul Pera Taksim','https://www.wyndhamhotels.com/ramada/istanbul-turkiye/ramada-istanbul-pera/overview'); return false;">Hotel Website</a>
 <a class="link-pill" href="#" onclick="openMapModal('https://www.google.com/maps?q=Asmal%C4%B1%20Mescit%2C%20Oteller%20Sk.%20No%3A1%20D%3A3%2C%2034430%20Beyo%C4%9Flu/%C4%B0stanbul%2C%20T%C3%BCrkiye&amp;output=embed'); return false;">View Map</a>
-<a class="link-pill" href="#" onclick="openReservationHub('Ramada By Wyndham Istanbul Pera Taksim','Booking.com','Not recorded','Not recorded','06 Jun 2026 → 10 Jun 2026','2:00 PM','12:00 PM','#','https://www.wyndhamhotels.com/'); return false;">Online Reservation</a>
+<a class="link-pill" href="#" onclick="openReservationHub('Ramada By Wyndham Istanbul Pera Taksim','Booking.com','Not recorded','Not recorded','06 Jun 2026 → 10 Jun 2026','2:00 PM','12:00 PM','#','https://www.wyndhamhotels.com/ramada/istanbul-turkiye/ramada-istanbul-pera/overview'); return false;">Online Reservation</a>
 </div>
 </article>
 </div>
@@ -1088,9 +1088,22 @@ function closeWebsiteHub() {
   document.getElementById('websiteModal').style.display = 'none';
 }
 
+function shouldUseLaunchCard(url) {
+  return /wyndhamhotels\.com/i.test(String(url || ''));
+}
+
 function openWebsiteExternal() {
   if (currentWebsiteUrl) {
-    openWebsiteBrowser(currentWebsiteUrl);
+    if (shouldUseLaunchCard(currentWebsiteUrl)) {
+      openExternalBrowser(
+        'Hotel Website — ' + (document.getElementById('websiteModalTitle').textContent || 'Hotel Website'),
+        currentWebsiteUrl,
+        true
+      );
+      closeWebsiteHub();
+    } else {
+      openWebsiteBrowser(currentWebsiteUrl);
+    }
   }
 }
 
@@ -1256,7 +1269,7 @@ function openHotelExternal() {
     openExternalBrowser(
       'Hotel Website — ' + (document.getElementById('reservationModalTitle').textContent || 'Hotel Website'),
       currentHotelUrl,
-      false
+      shouldUseLaunchCard(currentHotelUrl)
     );
     closeReservationHub();
   }
