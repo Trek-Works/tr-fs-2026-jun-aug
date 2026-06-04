@@ -1097,7 +1097,7 @@ function closeWebsiteHub() {
 }
 
 function shouldUseLaunchCard(url) {
-  return false;
+  return /wyndhamhotels\.com/i.test(String(url || ''));
 }
 
 function openWebsiteExternal() {
