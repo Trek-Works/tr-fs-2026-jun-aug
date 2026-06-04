@@ -229,6 +229,60 @@
     }
 
 
+
+    .card.pending {
+      opacity: .58;
+      cursor: not-allowed;
+      pointer-events: none;
+      filter: grayscale(.35);
+      background:
+        linear-gradient(180deg, rgba(248,250,252,0.92), rgba(241,245,249,0.90));
+      border-color: rgba(100,116,139,0.20);
+      box-shadow: 0 8px 20px rgba(15,23,42,0.045);
+    }
+
+    .card.pending:hover,
+    .card.pending:active,
+    .card.pending:focus-visible {
+      transform: none;
+      box-shadow: 0 8px 20px rgba(15,23,42,0.045);
+      border-color: rgba(100,116,139,0.20);
+      background:
+        linear-gradient(180deg, rgba(248,250,252,0.92), rgba(241,245,249,0.90));
+      outline: none;
+    }
+
+    .card.pending .card-chevron {
+      width: auto;
+      min-width: 0;
+      height: auto;
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: #64748b;
+      background: rgba(100,116,139,0.08);
+      border: 1px dashed rgba(100,116,139,0.28);
+    }
+
+    .card.pending .card-chevron {
+      font-size: 11px;
+      color: #64748b;
+      white-space: nowrap;
+    }
+
+    .card.pending .card-chevron::before {
+      content: "📄 Data Pending";
+    }
+
+    .card.pending:hover .card-chevron,
+    .card.pending:focus-visible .card-chevron {
+      transform: none;
+      background: rgba(100,116,139,0.08);
+      border-color: rgba(100,116,139,0.28);
+    }
+
     .hub-container {
       text-align: center;
       margin-top: 36px;
@@ -326,7 +380,7 @@
 </div>
 <div class="card-text">Tours, experiences, sightseeing and booking confirmations.</div>
 </article>
-<article aria-label="Open Airports" class="card" data-href="./airports.html" role="link" tabindex="0">
+<article aria-label="Airports data pending" class="card pending" role="note" tabindex="-1">
 <div class="card-top">
 
 <span aria-hidden="true" class="card-chevron">›</span>
@@ -337,7 +391,7 @@
 </div>
 <div class="card-text">Airport details, maps, terminals and transfer reference placeholders.</div>
 </article>
-<article aria-label="Open Data and eSIM" class="card" data-href="./data-and-esim.html" role="link" tabindex="0">
+<article aria-label="Data and eSIM data pending" class="card pending" role="note" tabindex="-1">
 <div class="card-top">
 
 <span aria-hidden="true" class="card-chevron">›</span>
@@ -359,7 +413,7 @@
 </div>
 <div class="card-text">International and domestic flight schedules, terminals and booking details.</div>
 </article>
-<article aria-label="Open Guides" class="card" data-href="./guides.html" role="link" tabindex="0">
+<article aria-label="Guides data pending" class="card pending" role="note" tabindex="-1">
 <div class="card-top">
 
 <span aria-hidden="true" class="card-chevron">›</span>
@@ -370,7 +424,7 @@
 </div>
 <div class="card-text">Reference guides and essential Türkiye travel information.</div>
 </article>
-<article aria-label="Open Immigration and Customs" class="card" data-href="./immigration-and-customs.html" role="link" tabindex="0">
+<article aria-label="Immigration and Customs data pending" class="card pending" role="note" tabindex="-1">
 <div class="card-top">
 
 <span aria-hidden="true" class="card-chevron">›</span>
@@ -381,7 +435,7 @@
 </div>
 <div class="card-text">Entry requirements, declarations, QR codes and border procedures.</div>
 </article>
-<article aria-label="Open Insurance" class="card" data-href="./insurance.html" role="link" tabindex="0">
+<article aria-label="Insurance data pending" class="card pending" role="note" tabindex="-1">
 <div class="card-top">
 
 <span aria-hidden="true" class="card-chevron">›</span>
@@ -392,7 +446,7 @@
 </div>
 <div class="card-text">Travel insurance documents, policy information and emergency references.</div>
 </article>
-<article aria-label="Open Medical and Recovery" class="card" data-href="./medical-and-recovery.html" role="link" tabindex="0">
+<article aria-label="Medical and Recovery data pending" class="card pending" role="note" tabindex="-1">
 <div class="card-top">
 
 <span aria-hidden="true" class="card-chevron">›</span>
@@ -403,7 +457,7 @@
 </div>
 <div class="card-text">Hospital details, surgery, recovery information and medical support references.</div>
 </article>
-<article aria-label="Open Shopping" class="card" data-href="./shopping.html" role="link" tabindex="0">
+<article aria-label="Shopping data pending" class="card pending" role="note" tabindex="-1">
 <div class="card-top">
 
 <span aria-hidden="true" class="card-chevron">›</span>
@@ -414,7 +468,7 @@
 </div>
 <div class="card-text">Shopping plans, markets, malls and budget considerations.</div>
 </article>
-<article aria-label="Open Task List" class="card" data-href="./task-list-guide.html" role="link" tabindex="0">
+<article aria-label="Task List data pending" class="card pending" role="note" tabindex="-1">
 <div class="card-top">
 
 <span aria-hidden="true" class="card-chevron">›</span>
@@ -425,7 +479,7 @@
 </div>
 <div class="card-text">Trip organisation, planning and preparation checklists.</div>
 </article>
-<article aria-label="Open Tours and Regional Travel" class="card" data-href="./tours-and-regional-travel.html" role="link" tabindex="0">
+<article aria-label="Tours and Regional Travel data pending" class="card pending" role="note" tabindex="-1">
 <div class="card-top">
 
 <span aria-hidden="true" class="card-chevron">›</span>
@@ -436,7 +490,7 @@
 </div>
 <div class="card-text">Jolly Tours, village travel, Ankara movements and regional itinerary references.</div>
 </article>
-<article aria-label="Open Transfers and Transport" class="card" data-href="./transfers-and-transport.html" role="link" tabindex="0">
+<article aria-label="Transfers and Transport data pending" class="card pending" role="note" tabindex="-1">
 <div class="card-top">
 
 <span aria-hidden="true" class="card-chevron">›</span>
@@ -447,7 +501,7 @@
 </div>
 <div class="card-text">Airport transfers, taxis, domestic transport and pickup arrangements.</div>
 </article>
-<article aria-label="Open Travel Packing Guide" class="card" data-href="./travel-packing-guide.html" role="link" tabindex="0">
+<article aria-label="Travel Packing Guide data pending" class="card pending" role="note" tabindex="-1">
 <div class="card-top">
 
 <span aria-hidden="true" class="card-chevron">›</span>
@@ -458,7 +512,7 @@
 </div>
 <div class="card-text">Packing checklist, medications, travel essentials and preparation notes.</div>
 </article>
-<article aria-label="Open Türkiye Travel Guide" class="card" data-href="./turkiye-travel-guide.html" role="link" tabindex="0">
+<article aria-label="Türkiye Travel Guide data pending" class="card pending" role="note" tabindex="-1">
 <div class="card-top">
 
 <span aria-hidden="true" class="card-chevron">›</span>
