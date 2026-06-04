@@ -1075,12 +1075,20 @@ function closeMapModal() {
 let currentWebsiteUrl = '';
 
 function openWebsiteHub(hotel, websiteUrl) {
-  currentWebsiteUrl = websiteUrl;
+  currentWebsiteUrl = String(websiteUrl || '').trim();
 
-  document.getElementById('websiteModalTitle').textContent = hotel;
-  document.getElementById('websiteHotel').textContent = hotel;
-  document.getElementById('websiteUrl').textContent = websiteUrl;
-  document.getElementById('websiteExternalLink').href = websiteUrl;
+  const modalTitle = document.getElementById('websiteModalTitle');
+  const hotelField = document.getElementById('websiteHotel');
+  const urlField = document.getElementById('websiteUrl');
+  const externalLink = document.getElementById('websiteExternalLink');
+
+  modalTitle.textContent = hotel;
+  hotelField.textContent = hotel;
+  urlField.textContent = currentWebsiteUrl;
+
+  externalLink.href = currentWebsiteUrl;
+  externalLink.setAttribute('data-url', currentWebsiteUrl);
+
   document.getElementById('websiteModal').style.display = 'flex';
 }
 
@@ -1093,16 +1101,20 @@ function shouldUseLaunchCard(url) {
 }
 
 function openWebsiteExternal() {
-  if (currentWebsiteUrl) {
-    if (shouldUseLaunchCard(currentWebsiteUrl)) {
+  const liveUrl = document.getElementById('websiteExternalLink').getAttribute('data-url') || currentWebsiteUrl;
+
+  if (liveUrl) {
+    currentWebsiteUrl = liveUrl;
+
+    if (shouldUseLaunchCard(liveUrl)) {
       openExternalBrowser(
         'Hotel Website — ' + (document.getElementById('websiteModalTitle').textContent || 'Hotel Website'),
-        currentWebsiteUrl,
+        liveUrl,
         true
       );
       closeWebsiteHub();
     } else {
-      openWebsiteBrowser(currentWebsiteUrl);
+      openWebsiteBrowser(liveUrl);
     }
   }
 }
