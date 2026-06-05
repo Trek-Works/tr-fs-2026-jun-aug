@@ -4,7 +4,7 @@
 // Scope: subdomain root (./)
 // =====================================================
 
-const CACHE_VERSION = "tw-tr-fs-2026-jun-aug-v4";
+const CACHE_VERSION = "tw-tr-fs-2026-jun-aug-v5-android-install-visible";
 const CACHE_NAME = `trekworks-${CACHE_VERSION}`;
 
 // -----------------------------------------------------
