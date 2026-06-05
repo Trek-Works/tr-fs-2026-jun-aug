@@ -416,7 +416,7 @@
 <div class="toolbar">
 <div class="pill" id="tripModePill">Trip Mode: Online</div>
 <div class="pill" id="tripModeHelp">?</div>
-<div class="pill install" id="installPill">
+<div class="pill install" id="installPill" style="display:none;">
 <span>⬇️</span>Install App
       </div>
 </div>
@@ -720,186 +720,32 @@ helpPill.addEventListener("click", () => {
 refreshTripModeUI();
 
 let deferredInstallPrompt = null;
-let serviceWorkerReadyPromise = Promise.resolve();
-
-const installPill = document.getElementById("installPill");
-const installModal = document.getElementById("installModal");
-const installModalBody = document.getElementById("installModalBody");
-const installModalClose = document.getElementById("installModalClose");
-
-function isStandaloneMode() {
-  return window.matchMedia("(display-mode: standalone)").matches ||
-    window.navigator.standalone === true;
-}
-
-function getBrowserInfo() {
-  const ua = navigator.userAgent || "";
-  return {
-    ua,
-    isAndroid: /Android/i.test(ua),
-    isIOS: /iPad|iPhone|iPod/i.test(ua),
-    isChrome: /Chrome|CriOS/i.test(ua) && !/Edg|OPR|SamsungBrowser/i.test(ua),
-    isSamsung: /SamsungBrowser/i.test(ua),
-    isEdge: /Edg/i.test(ua),
-    isFirefox: /Firefox|FxiOS/i.test(ua)
-  };
-}
-
-function openCurrentPageInChrome() {
-  const url = new URL(window.location.href);
-  const chromeIntent =
-    `intent://${url.host}${url.pathname}${url.search}${url.hash}` +
-    `#Intent;scheme=${url.protocol.replace(":", "")};package=com.android.chrome;end`;
-  window.location.href = chromeIntent;
-}
-
-function waitForInstallPrompt(timeoutMs = 2200) {
-  if (deferredInstallPrompt) return Promise.resolve(true);
-
-  return new Promise((resolve) => {
-    let resolved = false;
-
-    const done = (value) => {
-      if (resolved) return;
-      resolved = true;
-      window.removeEventListener("beforeinstallprompt", listener);
-      clearTimeout(timer);
-      resolve(value);
-    };
-
-    const listener = (event) => {
-      event.preventDefault();
-      deferredInstallPrompt = event;
-      installPill.style.display = "inline-flex";
-      done(true);
-    };
-
-    const timer = setTimeout(() => done(Boolean(deferredInstallPrompt)), timeoutMs);
-    window.addEventListener("beforeinstallprompt", listener, { once: true });
-  });
-}
-
-async function runNativeInstallPrompt() {
-  if (!deferredInstallPrompt) return false;
-
-  const promptEvent = deferredInstallPrompt;
-  deferredInstallPrompt = null;
-
-  promptEvent.prompt();
-  try {
-    const choice = await promptEvent.userChoice;
-    if (choice && choice.outcome === "accepted") {
-      installPill.style.display = "none";
-    }
-  } catch {}
-
-  return true;
-}
-
-function showInstallInstructions(reason = "fallback") {
-  const browser = getBrowserInfo();
-
-  let html = `
-    <p>The browser did not make the native install prompt available yet.</p>
-    <ol>
-      <li>Refresh this page once.</li>
-      <li>Tap <strong>Install App</strong> again.</li>
-      <li>If needed, use the browser menu and select <strong>Install app</strong> or <strong>Add to Home screen</strong>.</li>
-    </ol>`;
-
-  if (browser.isAndroid && !browser.isChrome) {
-    html = `
-      <p>This browser did not provide the native PWA install prompt.</p>
-      <ol>
-        <li>Open this trip app in <strong>Chrome</strong>.</li>
-        <li>Wait for the page to finish loading.</li>
-        <li>Tap <strong>Install App</strong> again.</li>
-      </ol>
-      <p><strong>Note:</strong> Chrome controls the final install pop-up; the app can request it, but the browser must allow it.</p>`;
-  } else if (browser.isAndroid && browser.isChrome) {
-    html = `
-      <p>Chrome has not made the native install prompt available yet.</p>
-      <ol>
-        <li>Refresh this page once.</li>
-        <li>Wait until the trip home page finishes loading.</li>
-        <li>Tap <strong>Install App</strong> again.</li>
-        <li>If still missing, tap the <strong>⋮</strong> menu and select <strong>Install app</strong>.</li>
-      </ol>`;
-  } else if (browser.isIOS) {
-    html = `
-      <p>Apple devices do not support the Android-style native PWA install prompt.</p>
-      <ol>
-        <li>Open this page in <strong>Safari</strong>.</li>
-        <li>Tap <strong>Share</strong>.</li>
-        <li>Tap <strong>Add to Home Screen</strong>.</li>
-      </ol>`;
-  }
-
-  installModalBody.innerHTML = html;
-  installModal.classList.add("open");
-  installModal.setAttribute("aria-hidden", "false");
-}
-
-function hideInstallInstructions() {
-  installModal.classList.remove("open");
-  installModal.setAttribute("aria-hidden", "true");
-}
 
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredInstallPrompt = e;
-  installPill.style.display = "inline-flex";
+  document.getElementById("installPill").style.display = "inline-flex";
 });
 
 window.addEventListener("appinstalled", () => {
-  installPill.style.display = "none";
+  document.getElementById("installPill").style.display = "none";
   deferredInstallPrompt = null;
 });
 
-installPill.addEventListener("click", async () => {
-  if (isStandaloneMode()) return;
-
-  hideInstallInstructions();
-
-  const originalText = installPill.innerHTML;
-  installPill.innerHTML = "<span>⏳</span>Checking install…";
-
-  try {
-    await serviceWorkerReadyPromise;
-    if (deferredInstallPrompt || await waitForInstallPrompt()) {
-      const launched = await runNativeInstallPrompt();
-      if (launched) return;
-    }
-
-    const browser = getBrowserInfo();
-
-    // If the user has landed inside Samsung Internet, an Android WebView, or another
-    // default browser, move them into Chrome where the PWA install prompt is most reliable.
-    if (browser.isAndroid && !browser.isChrome) {
-      openCurrentPageInChrome();
-      setTimeout(() => showInstallInstructions("non-chrome"), 900);
-      return;
-    }
-
-    showInstallInstructions("no-prompt");
-  } finally {
-    installPill.innerHTML = originalText;
-  }
+document.getElementById("installPill").addEventListener("click", async () => {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
 });
-
-installModalClose.addEventListener("click", hideInstallInstructions);
-installModal.addEventListener("click", (event) => {
-  if (event.target === installModal) hideInstallInstructions();
-});
-
-if (isStandaloneMode()) {
-  installPill.style.display = "none";
-}
 
 if ("serviceWorker" in navigator) {
-  serviceWorkerReadyPromise = navigator.serviceWorker.register("./service-worker.js", { scope: "./" })
-    .then((registration) => registration.update().then(() => navigator.serviceWorker.ready))
-    .catch(() => Promise.resolve());
+  navigator.serviceWorker.register("./service-worker.js", { scope: "./" })
+    .then(() => {
+      navigator.serviceWorker.getRegistrations().then(regs => {
+        for (let reg of regs) reg.update();
+      });
+    });
 }
 
 (function () {
