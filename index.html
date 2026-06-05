@@ -6,6 +6,12 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>FS-2026-Jun-Aug · Türkiye Trip</title>
 <link href="./manifest.json" rel="manifest"/>
+<meta name="theme-color" content="#0b1220"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="Türkiye Trip"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<link rel="apple-touch-icon" href="./assets/icons/icon-TR-FS-2026-192.png"/>
 <style>
     :root {
       --bg-main: #f4f7fb;
@@ -301,6 +307,65 @@
       box-shadow: 0 10px 26px rgba(15,23,42,0.08);
     }
 
+
+
+    .install-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,.52);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 1200;
+    }
+
+    .install-modal.open { display: flex; }
+
+    .install-card {
+      width: min(520px, 100%);
+      border-radius: 18px;
+      background: rgba(255,255,255,.98);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 24px 60px rgba(15,23,42,.22);
+      padding: 18px;
+    }
+
+    .install-card-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .install-card h2 {
+      margin: 0;
+      font-size: 18px;
+      color: var(--text-main);
+    }
+
+    .install-close {
+      border: 0;
+      background: rgba(100,116,139,.10);
+      color: var(--text-main);
+      border-radius: 999px;
+      width: 32px;
+      height: 32px;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .install-card p,
+    .install-card li {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .install-card ol { padding-left: 20px; margin-bottom: 0; }
+
     .ios-install-helper {
       position: fixed;
       bottom: 14px;
@@ -351,7 +416,7 @@
 <div class="toolbar">
 <div class="pill" id="tripModePill">Trip Mode: Online</div>
 <div class="pill" id="tripModeHelp">?</div>
-<div class="pill install" id="installPill" style="display:none;">
+<div class="pill install" id="installPill">
 <span>⬇️</span>Install App
       </div>
 </div>
@@ -529,6 +594,19 @@
 </div>
 </main>
 </div>
+
+<div class="install-modal" id="installModal" aria-hidden="true">
+  <div class="install-card" role="dialog" aria-modal="true" aria-labelledby="installModalTitle">
+    <div class="install-card-header">
+      <h2 id="installModalTitle">Install Türkiye Trip App</h2>
+      <button class="install-close" id="installModalClose" type="button" aria-label="Close install instructions">×</button>
+    </div>
+    <div id="installModalBody">
+      <p>Use your browser menu to install this trip app for offline use.</p>
+    </div>
+  </div>
+</div>
+
 <div class="ios-install-helper" id="iosInstallHelper">
 <p>
 <strong>Install this trip for offline use</strong><br/>
@@ -643,23 +721,99 @@ refreshTripModeUI();
 
 let deferredInstallPrompt = null;
 
+const installPill = document.getElementById("installPill");
+const installModal = document.getElementById("installModal");
+const installModalBody = document.getElementById("installModalBody");
+const installModalClose = document.getElementById("installModalClose");
+
+function isStandaloneMode() {
+  return window.matchMedia("(display-mode: standalone)").matches ||
+    window.navigator.standalone === true;
+}
+
+function showInstallInstructions() {
+  const ua = navigator.userAgent || "";
+  const isAndroid = /Android/i.test(ua);
+  const isIOS = /iPad|iPhone|iPod/i.test(ua);
+  const isChrome = /Chrome|CriOS/i.test(ua) && !/Edg|OPR|SamsungBrowser/i.test(ua);
+  const isSamsung = /SamsungBrowser/i.test(ua);
+
+  let html = `
+    <p>This device did not provide the automatic install prompt. Use the browser menu instead.</p>
+    <ol>
+      <li>Open this page in <strong>Chrome</strong> where possible.</li>
+      <li>Tap the browser menu.</li>
+      <li>Select <strong>Install app</strong> or <strong>Add to Home screen</strong>.</li>
+    </ol>`;
+
+  if (isAndroid && isChrome) {
+    html = `
+      <p>Chrome should show an install option once the app finishes loading.</p>
+      <ol>
+        <li>Tap the <strong>⋮</strong> menu in Chrome.</li>
+        <li>Select <strong>Install app</strong> or <strong>Add to Home screen</strong>.</li>
+        <li>If the option is missing, refresh the page once and try again.</li>
+      </ol>`;
+  } else if (isAndroid && isSamsung) {
+    html = `
+      <p>Samsung Internet may not show the same install prompt as Chrome.</p>
+      <ol>
+        <li>Tap the browser menu.</li>
+        <li>Select <strong>Add page to</strong>, then <strong>Home screen</strong>.</li>
+        <li>For the best offline app behaviour, open this URL in Chrome and use <strong>Install app</strong>.</li>
+      </ol>`;
+  } else if (isIOS) {
+    html = `
+      <p>Apple devices install web apps from Safari.</p>
+      <ol>
+        <li>Open this page in <strong>Safari</strong>.</li>
+        <li>Tap <strong>Share</strong>.</li>
+        <li>Tap <strong>Add to Home Screen</strong>.</li>
+      </ol>`;
+  }
+
+  installModalBody.innerHTML = html;
+  installModal.classList.add("open");
+  installModal.setAttribute("aria-hidden", "false");
+}
+
+function hideInstallInstructions() {
+  installModal.classList.remove("open");
+  installModal.setAttribute("aria-hidden", "true");
+}
+
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredInstallPrompt = e;
-  document.getElementById("installPill").style.display = "inline-flex";
+  installPill.style.display = "inline-flex";
 });
 
 window.addEventListener("appinstalled", () => {
-  document.getElementById("installPill").style.display = "none";
+  installPill.style.display = "none";
   deferredInstallPrompt = null;
 });
 
-document.getElementById("installPill").addEventListener("click", async () => {
-  if (!deferredInstallPrompt) return;
-  deferredInstallPrompt.prompt();
-  await deferredInstallPrompt.userChoice;
-  deferredInstallPrompt = null;
+installPill.addEventListener("click", async () => {
+  if (isStandaloneMode()) return;
+
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    return;
+  }
+
+  showInstallInstructions();
 });
+
+installModalClose.addEventListener("click", hideInstallInstructions);
+installModal.addEventListener("click", (event) => {
+  if (event.target === installModal) hideInstallInstructions();
+});
+
+if (isStandaloneMode()) {
+  installPill.style.display = "none";
+}
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("./service-worker.js", { scope: "./" })
